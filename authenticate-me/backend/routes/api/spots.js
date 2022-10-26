@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage } = require('../../db/models');
+const { User, Spot, SpotImage, Review, ReviewImage } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -16,7 +16,7 @@ const validatePost = [
 router.get('/', async (req, res, next) => {
     const spots = await Spot.findAll();
 
-    res.json(spots);
+    res.json({Spots: spots});
 })
 
 router.post('/', restoreUser, requireAuth, validatePost, async (req, res, next) => {
@@ -121,4 +121,45 @@ router.delete('/:spotId',
         return res.json({ message: "successfully deleted", statusCode: 200});
     }
 )
+
+router.post('/:spotId/reviews', restoreUser, requireAuth, async(req, res, next) => {
+    const {spotId} = req.params;
+    const {review, stars} = req.body;
+    const spot = await Spot.findByPk(spotId);
+    if(!spot) {
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        } )
+    }
+    if(await Review.findOne({where: {spotId, userId: req.user.id}})) {
+        res.status(403);
+        res.json({
+            message: 'User already has a review for this spot',
+            statusCode: 403
+        })
+    }
+    const newReview = Review.build({review, stars, spotId, userId: req.user.id});
+    newReview.save();
+    return res.json(newReview)
+})
+
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const {spotId} = req.params;
+    const reviews = await Review.findAll({
+        where: {spotId},
+        include: {
+            model: ReviewImage
+        }
+    })
+
+    if(!(await Spot.findByPk(spotId))) {
+        return res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        } )
+    }
+
+    res.json({Reviews: reviews})
+})
 module.exports = router;
