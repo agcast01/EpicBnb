@@ -8,81 +8,87 @@ const { off } = require('process');
 
 const router = express.Router();
 
-router.get('/current', 
-    restoreUser,
+router.get('/current',
     requireAuth,
-    async(req, res, next) => {
+    async (req, res, next) => {
         const reviews = await Review.findAll({
             where: {
                 userId: req.user.id,
             },
             include: [
-                {model: User},
-                {model: Spot},
-                {model: ReviewImage}
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                { model: Spot },
+                { model: ReviewImage }
             ]
         });
-        
+
         return res.json(reviews);
     }
 )
 
-router.post('/:reviewId/images', restoreUser, requireAuth, async(req, res, next) => {
-    const {reviewId} = req.params;
-    const {url} = req.body;
-    if(!(await Review.findByPk(reviewId))) {
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params;
+    const { url } = req.body;
+    const review = await Review.findByPk(reviewId)
+    if (!review) {
         res.status(404);
-        res.json({
+        return res.json({
             message: "Review couldn't be found",
             statusCode: 404
         })
     };
 
-    if((await ReviewImage.findAll({where: {reviewId}})).length >= 10) {
+    if ((await ReviewImage.findAll({ where: { reviewId } })).length >= 10) {
         res.status(403);
-        res.json({
+        return res.json({
             message: "Maximum number of images for this resource was reached",
             statusCode: 403
         })
     }
-    const newImage = ReviewImage.build({url, reviewId});
-    newImage.save();
+
+    if (review.userId !== req.user.id) {
+        return res.json({ message: "Only the owner of the review can add images" })
+    }
+    const newImage = await ReviewImage.create({ url, reviewId });
     return res.json(newImage);
 })
 
-router.put('/:reviewId', restoreUser, requireAuth, async (req, res, next) => {
-    const {reviewId} = req.params;
-    const {review, stars} = req.body;
+router.put('/:reviewId', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params;
+    const { review, stars } = req.body;
 
     const oldReview = await Review.findByPk(reviewId);
 
-   
-    if(!oldReview) {
+
+    if (!oldReview) {
         return res.json({
             message: "Review couldn't be found",
             statusCode: 404
         })
     }
 
-    if(oldReview.userId !== req.user.id) return res.json({message: "Must be the owner of the review to edit"})
+    if (oldReview.userId !== req.user.id) return res.json({ message: "Must be the owner of the review to edit" })
 
-    if(review) oldReview.review = review;
-    if(stars) oldReview.stars = stars;
+    if (review) oldReview.review = review;
+    if (stars) oldReview.stars = stars;
 
     return res.json(oldReview);
 })
 
-router.delete('/:reviewid', restoreUser, requireAuth, async(req, res, next) => {
-    const {reviewId} = req.params;
+router.delete('/:reviewid', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params;
     const review = Review.findByPk(reviewId);
-    if(review) {
+    if (review) {
         return res.json({
             message: "Review couldn't be found",
             statusCode: 404
         })
     }
 
-    if(review.userId !== req.user.id) return res.json({message: "Must be the owner of the review to edit"})
+    if (review.userId !== req.user.id) return res.json({ message: "Must be the owner of the review to edit" })
 
     await review.destroy();
 

@@ -18,7 +18,8 @@ module.exports = {
         references: {
           model: 'Spots',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -26,7 +27,8 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       startDate: {
         type: Sequelize.DATE,
@@ -47,8 +49,13 @@ module.exports = {
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       }
     });
+
+    await queryInterface.addIndex('Bookings', ['spotId', 'startDate', 'endDate'], {
+      unique: true
+    })
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Bookings');
+    await queryInterface.removeIndex('Bookings', ['spotId', 'startDate', 'endDate'])
   }
 };
