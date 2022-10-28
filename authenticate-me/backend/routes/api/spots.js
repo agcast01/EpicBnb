@@ -41,7 +41,7 @@ router.get('/', async (req, res, next) => {
 
     pagination.offset = sizeInt * (pageInt - 1);
 
-    const spots = await Spot.findAll({where, pagination});
+    const spots = await Spot.findAll({where, ...pagination});
 
     res.json({ Spots: spots });
 })
@@ -88,7 +88,7 @@ router.get('/:spotId', async (req, res, next) => {
             model: User,
             attributes: ['firstName', 'lastName', 'id']
         },
-        { model: SpotImage }
+        { model: SpotImage, attributes: ['id', 'url', 'preview']}
         ]
     })
     if (!spot) {

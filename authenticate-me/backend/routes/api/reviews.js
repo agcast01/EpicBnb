@@ -82,13 +82,13 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
 
 router.delete('/:reviewid', requireAuth, async (req, res, next) => {
     const { reviewId } = req.params;
-    const review = Review.findByPk(reviewId);
-    if (review) {
+    const review = await Review.findByPk(reviewId);
+    if (!review) {
         return res.json({
             message: "Review couldn't be found",
             statusCode: 404
         })
-    }
+    };
 
     if (review.userId !== req.user.id) return res.json({ message: "Must be the owner of the review to edit" })
 

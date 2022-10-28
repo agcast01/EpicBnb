@@ -4,6 +4,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { nextTick } = require('process');
 
 const router = express.Router();
 
@@ -30,9 +31,23 @@ const validateSignup = [
 router.post(
     '/',
     validateSignup,
-    async (req, res) => {
+    async (req, res, next) => {
         const { email, password, username, firstName, lastName } = req.body;
         const user = await User.signup({ email, username, password, firstName, lastName });
+
+        if(await User.findOne({where: {email}})) {
+          const err = new Error('User already exists');
+          err.errors = { email: ' User with that email already exists'};
+          err.status = 403;
+          next(err);
+        }
+
+        if(await User.findOne({where: {username}})) {
+          const err = new Error('User already exists');
+          err.errors = { email: ' User with that username already exists'};
+          err.status = 403;
+          next(err);
+        }
 
         await setTokenCookie(res, user);
 
