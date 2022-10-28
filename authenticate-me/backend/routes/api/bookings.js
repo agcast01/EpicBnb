@@ -101,6 +101,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     booking.startDate = startDate;
     booking.endDate = endDate;
 
+    await booking.save();
+
     return res.json(booking);
 })
 module.exports = router;

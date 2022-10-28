@@ -129,7 +129,9 @@ router.put('/:spotId',
         if (description) spot.description = description;
         if (price) spot.price = price;
 
-        return res.json(spot)
+        await spot.save();
+
+        return res.json(spot);
     })
 
 router.delete('/:spotId',
