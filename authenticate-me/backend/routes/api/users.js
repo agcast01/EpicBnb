@@ -33,7 +33,6 @@ router.post(
     validateSignup,
     async (req, res, next) => {
         const { email, password, username, firstName, lastName } = req.body;
-        const user = await User.signup({ email, username, password, firstName, lastName });
 
         if(await User.findOne({where: {email}})) {
           const err = new Error('User already exists');
@@ -48,6 +47,8 @@ router.post(
           err.status = 403;
           next(err);
         }
+
+        const user = await User.signup({ email, username, password, firstName, lastName });
 
         await setTokenCookie(res, user);
 
