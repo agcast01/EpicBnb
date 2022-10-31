@@ -111,7 +111,7 @@ router.put('/:spotId',
         
         if (!spot) {
             res.status(404);
-            res.json({
+            return res.json({
                 message: "Spot couldn't be found",
                 statusCode: 404
             });
