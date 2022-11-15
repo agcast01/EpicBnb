@@ -8,6 +8,7 @@ const loadSpots = (spots) => {
         spots
     }
 }
+
 export const load = () => async dispatch => {
     const response = await csrfFetch('/api/spots')
     if(response.ok) {
@@ -42,11 +43,20 @@ export const create = (spot) => async dispatch => {
     }
 }
 
+export const userSpots = () => async dispatch => {
+    const response = await csrfFetch(`/api/spots/current`);
+    if(response.ok) {
+        const spots = await response.json();
+        console.log('userSpots: ', spots)
+        dispatch(loadSpots(spots));
+    }
+}
+
 const spotReducer = (state = {spots: null}, action) => {
     const newState = {...state}
     switch (action.type) {
         case LOAD:
-            newState.spots= [...action.spots.Spots];
+            newState.spots = [...action.spots.Spots];
             return newState;
         case CREATE:
             newState.spots = [...state.spots, action.spot];

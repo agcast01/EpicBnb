@@ -60,7 +60,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     const spots = await Spot.findAll({
         where: { ownerId }
     })
-    return res.json(spots);
+    return res.json({Spots: spots});
 })
 
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {

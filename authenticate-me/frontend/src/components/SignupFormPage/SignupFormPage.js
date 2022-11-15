@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 function SignupFormPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -11,6 +12,8 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -18,11 +21,13 @@ function SignupFormPage() {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.userSignUp({ email, username, password }))
+      const newUser = dispatch(sessionActions.userSignUp({ email, username, password, firstName, lastName }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
+        history.push('/')
+        return newUser;
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
@@ -47,6 +52,24 @@ function SignupFormPage() {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+      </label>
+      <label>
+        First Name
+        <input 
+          type="text"
+          value={firstName}
+          onChange={e => setFirstName(e.target.value)}
+          required
+        />
+      </label>
+      <label>
+        Last Name
+        <input 
+          type='text'
+          value={lastName}
+          onChange={e => setLastName(e.target.value)}
           required
         />
       </label>

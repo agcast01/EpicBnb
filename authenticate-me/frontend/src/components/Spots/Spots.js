@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { NavLink } from "react-router-dom";
 import * as spotActions from '../../store/spot'
 const Spots = () => {
     const dispatch = useDispatch();
     const spots = useSelector(state => state.spots.spots)
     const sessionUser = useSelector(state => state.session.user);
-    console.log(sessionUser)
     useEffect(() => {
         dispatch(spotActions.load())
     }, [dispatch])
@@ -16,6 +16,14 @@ const Spots = () => {
                 <li key={spot.id}>{spot.name}</li>
             ))}
         </ul>
+        {sessionUser && (
+            <>
+            <NavLink to='/mySpots'>MySpots</NavLink>
+            <NavLink to='/addSpot'>
+                NewSpot
+            </NavLink>
+            </>
+        )}
         </>
     )
 }
