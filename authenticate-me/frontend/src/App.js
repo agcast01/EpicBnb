@@ -10,6 +10,9 @@ import * as sessionActions from './store/session'
 import CreateSpotForm from './components/Spots/CreateSpotForm'
 import * as spotActions from './store/spot'
 import MySpots from "./components/Spots/MySpots";
+import SpotDetails from "./components/Spots/SpotDetails";
+import EditSpotForm from "./components/Spots/EditSpotFrom";
+import DeleteSpotForm from "./components/Spots/DeleteSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,9 +22,9 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
   }, [dispatch, user])
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(spotActions.load())
-}, [dispatch])
+}, [dispatch]) */
   return (
     <>
     <Navigation isLoaded={isLoaded}/>
@@ -41,6 +44,15 @@ function App() {
       </Route>
       <Route path='/mySpots'>
         <MySpots />
+      </Route>
+      <Route exact path='/:spotId'>
+        <SpotDetails />
+      </Route>
+      <Route path='/editSpot/:spotId'>
+        <EditSpotForm />
+      </Route>
+      <Route path='/deleteSpot/:spotId'>
+        <DeleteSpotForm />
       </Route>
     </Switch>)}
     

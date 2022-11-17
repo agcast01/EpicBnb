@@ -1,9 +1,18 @@
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import * as spotActions from '../../store/spot';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 
 const EditSpotForm = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
+    const spot = useSelector(state => state.spots)
+    useEffect(() => {
+        dispatch(spotActions.singleSpot(spotId))
+    }, [dispatch])
+
+    const {spotId} = useParams()
+
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -13,23 +22,23 @@ const EditSpotForm = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const payload = {
-            address,
-            city,
-            state,
-            country,
-            lat,
-            lng,
-            name,
-            description,
-            price
-        }
+        spot.address = address;
+        spot.city = city;
+        spot.state = state;
+        spot.country = country;
+        spot.lat = lat;
+        spot.lng = lng;
+        spot.name = name;
+        spot.description = description;
+        spot.price = price;
 
-        dispatch(spotActions.edit(payload))
+        dispatch(spotActions.edit(spot))
+        
+        history.push(`/${spotId}`)
     }
     return (
         <>
@@ -103,7 +112,7 @@ const EditSpotForm = () => {
                     value={price}
                     onChange={e => setPrice(e.target.value)}
                 />
-                <button type="submit">Create new spot</button>
+                <button type="submit">Edit spot</button>
             </form>
         </>
     )

@@ -15,35 +15,36 @@ const validatePost = [
     handleValidationErrors
 ];
 router.get('/', async (req, res, next) => {
-    const {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
+    const { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
     const where = {};
 
-    if(minLat) where.lat = {[Op.gte]: minLat};
-    if(maxLat) where.lat = {[Op.lte]: maxLat};
-    if(minLng) where.lng = {[Op.gte]: minLng};
-    if(maxLng) where.lng = {[Op.lte]: maxLng};
-    if(minPrice) where.price = {[Op.gte]: minPrice};
-    if(maxPrice) where.price = {[Op.lte]: maxPrice};
+    if (minLat) where.lat = { [Op.gte]: minLat };
+    if (maxLat) where.lat = { [Op.lte]: maxLat };
+    if (minLng) where.lng = { [Op.gte]: minLng };
+    if (maxLng) where.lng = { [Op.lte]: maxLng };
+    if (minPrice) where.price = { [Op.gte]: minPrice };
+    if (maxPrice) where.price = { [Op.lte]: maxPrice };
 
     const pagination = {};
     let pageInt, sizeInt;
-    if(page) {pageInt = parseInt(page)};
-    if(size) {sizeInt = parseInt(size)};
+    if (page) { pageInt = parseInt(page) };
+    if (size) { sizeInt = parseInt(size) };
 
-    if(!pageInt || pageInt < 1) pageInt = 1;
-    else if(pageInt > 10) pageInt = 10
+    if (!pageInt || pageInt < 1) pageInt = 1;
+    else if (pageInt > 10) pageInt = 10
 
-    if(!sizeInt || sizeInt > 20) sizeInt = 20;
-    else if(sizeInt < 1) sizeInt = 1;
+    if (!sizeInt || sizeInt > 20) sizeInt = 20;
+    else if (sizeInt < 1) sizeInt = 1;
 
     pagination.limit = sizeInt;
 
     pagination.offset = sizeInt * (pageInt - 1);
 
-    const spots = await Spot.findAll({where, ...pagination});
-
-    res.json({ Spots: spots });
+    const spots = await Spot.findAll({ where, ...pagination });
+    const data = { Spots: {} }
+    spots.forEach(spot => data.Spots[spot.id] = spot);
+    res.json(data);
 })
 
 router.post('/', requireAuth, validatePost, async (req, res, next) => {
@@ -60,7 +61,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     const spots = await Spot.findAll({
         where: { ownerId }
     })
-    return res.json({Spots: spots});
+    return res.json({ Spots: spots });
 })
 
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
@@ -88,7 +89,7 @@ router.get('/:spotId', async (req, res, next) => {
             model: User,
             attributes: ['firstName', 'lastName', 'id']
         },
-        { model: SpotImage, attributes: ['id', 'url', 'preview']}
+        { model: SpotImage, attributes: ['id', 'url', 'preview'] }
         ]
     })
     if (!spot) {
@@ -108,7 +109,7 @@ router.put('/:spotId',
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
         const spot = await Spot.findByPk(spotId);
-        
+
         if (!spot) {
             res.status(404);
             return res.json({
@@ -209,7 +210,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     const { startDate, endDate } = req.body;
 
-    const spotBookings = await Booking.findAll({where: {spotId}});
+    const spotBookings = await Booking.findAll({ where: { spotId } });
 
     const startTime = new Date(startDate).getTime()
 
@@ -218,7 +219,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     let err;
     spotBookings.forEach(booking => {
-        if((startTime <= booking.endDate.getTime() && startTime >= booking.endDate.getTime()) || (endTime <= booking.endDate.getTime() && endTime >= booking.endDate.getTime())) {
+        if ((startTime <= booking.endDate.getTime() && startTime >= booking.endDate.getTime()) || (endTime <= booking.endDate.getTime() && endTime >= booking.endDate.getTime())) {
             res.status(403);
             err = true;
             return res.json({
@@ -229,9 +230,9 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                     endDate: 'End date conflicts with a current booking'
                 }
             })
-        }        
+        }
     })
-    if(err) return
+    if (err) return
     const newBooking = await Booking.create({ startDate, endDate, spotId, userId: req.user.id })
 
 
@@ -239,10 +240,10 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 })
 
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
-    const {spotId} = req.params;
+    const { spotId } = req.params;
 
     const spot = await Spot.findByPk(spotId);
-    if(!spot) {
+    if (!spot) {
         res.status(404);
         return res.json({
             message: "Spot couldn't be found",
@@ -252,13 +253,13 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
     const userId = req.user.id;
     let Bookings;
-    if(spot.ownerId !== userId) {
-       Bookings = await Booking.findAll({where: {spotId}, attributes: ['spotId', 'startDate', 'endDate']}); 
+    if (spot.ownerId !== userId) {
+        Bookings = await Booking.findAll({ where: { spotId }, attributes: ['spotId', 'startDate', 'endDate'] });
     } else {
-        Bookings = await Booking.findAll({where: {spotId}, include: {model: User}})
+        Bookings = await Booking.findAll({ where: { spotId }, include: { model: User } })
     }
 
-    res.json({Bookings});
+    res.json({ Bookings });
 })
 
 module.exports = router;

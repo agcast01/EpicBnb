@@ -12,12 +12,15 @@ const login = (user) => {
 export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('api/session');
     const data = await response.json();
-
-    dispatch(login(data));
-    return data;
+    console.log('data:', data)
+    if(data.user){
+        dispatch(login(data));
+        return data;
+    }
 }
 
 export const loginUser = (user) => async dispatch => {
+    console.log('user', user)
     const response = await csrfFetch('/api/session', {
         method: 'POST',
         header: {
@@ -76,14 +79,15 @@ export const logoutUser = () => async dispatch => {
 }
 
 const sessionReducer = (state = {user: null}, action) => {
-    const newState = {...state}
+    let newState = {}
     switch (action.type) {
         case LOGIN:
             newState.user = action.user;
-            return newState
+            console.log(action.user)
+            if(action.user) return newState
+            return state
         case LOGOUT:
-            newState.user = null;
-            return newState
+            return {user: null}
         case SIGNUP:
             newState.user = action.user;
             return newState;

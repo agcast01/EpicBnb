@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { userSpots } from "../../store/spot";
 const MySpots = () => {
     const dispatch = useDispatch()
@@ -9,11 +10,12 @@ const MySpots = () => {
     }, [dispatch])
 
     const spots = useSelector(state => state.spots)
-    console.log('Spots:', spots.spots);
     return(
         <>
         <ul>
-            {spots.spots && spots.spots.length && spots.spots.map()}
+            {spots && Object.keys(spots).map(id => (
+                <li key={spots[id]}><NavLink to={`/${spots[id].id}`}>{spots[id].name}</NavLink></li>
+            ))}
         </ul>
             
         </>
