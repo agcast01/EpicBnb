@@ -62,12 +62,7 @@ module.exports = (sequelize, DataTypes) => {
     previewImage: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Spot',
-    defaultScope: {
-      attributes :{
-        exclude: ['createdAt', 'updatedAt']
-      }
-    }
+    modelName: 'Spot'
   });
   return Spot;
 };

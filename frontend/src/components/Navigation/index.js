@@ -39,10 +39,14 @@ function Navigation({ isLoaded }){
     <ul className='navbar'>
       <li>
         <NavLink exact to="/">Home</NavLink>
-        <span className='profile' >
+        
+        <span className='right' >
+        <span>EpicBnb your home</span>
+          <span className='profile'>
           {isLoaded && sessionLinks}
           <span className="material-symbols-outlined" id="profile-pic">
             person_filled
+          </span>
           </span>
         </span>
       </li>
