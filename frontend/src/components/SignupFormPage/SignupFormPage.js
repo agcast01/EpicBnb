@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
-function SignupFormPage() {
-  const history = useHistory();
+function SignupFormPage({setOpen, isOpen}) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -26,14 +25,16 @@ function SignupFormPage() {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
-        history.push('/')
+        setOpen(!isOpen)
         return newUser;
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+    <div className="modal_background"/>
+    <form onSubmit={handleSubmit} className="modal">
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -92,7 +93,9 @@ function SignupFormPage() {
         />
       </label>
       <button type="submit">Sign Up</button>
+      <button onClick={() => setOpen(!isOpen)}>Cancel</button>
     </form>
+    </>
   );
 }
 

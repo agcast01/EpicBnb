@@ -1,8 +1,28 @@
-ul {
-    list-style: none;
+.spots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.spots {
-    color: black;
-    text-decoration: none;
+.imageCard {
+    min-width: 300px;
+    min-height: 300px;
+    background-color: aqua;
+    border-radius: 10px;
+}
+
+.spots li {
+    margin: 20px;
+}
+
+.spots li:hover {
+    cursor: pointer;
+}
+
+.location {
+    font-weight: 500;
+}
+
+.price {
+    font-weight: 500;
 }

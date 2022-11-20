@@ -8,11 +8,12 @@ import SignupFormPage from "./components/SignupFormPage/SignupFormPage";
 import Spots from "./components/Spots/Spots";
 import * as sessionActions from './store/session'
 import CreateSpotForm from './components/Spots/CreateSpotForm'
-import * as spotActions from './store/spot'
-import MySpots from "./components/Spots/MySpots";
+import MySpots from "./components/ProfilePage/MySpots";
 import SpotDetails from "./components/Spots/SpotDetails";
 import EditSpotForm from "./components/Spots/EditSpotFrom";
 import DeleteSpotForm from "./components/Spots/DeleteSpotForm";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
+import EditReviewForm from "./components/Reviews/EditReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,8 +43,8 @@ function App() {
       <Route path="/addSpot">
         <CreateSpotForm />
       </Route>
-      <Route path='/mySpots'>
-        <MySpots />
+      <Route path='/profile'>
+        <ProfilePage />
       </Route>
       <Route exact path='/:spotId'>
         <SpotDetails />
@@ -53,6 +54,9 @@ function App() {
       </Route>
       <Route path='/deleteSpot/:spotId'>
         <DeleteSpotForm />
+      </Route>
+      <Route path = '/editReview/:reviewId'>
+        <EditReviewForm />
       </Route>
     </Switch>)}
     

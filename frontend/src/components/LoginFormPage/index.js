@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import './LoginFormPage.css';
 
-function LoginFormPage() {
+function LoginFormPage({isOpen, setOpen}) {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const [credential, setCredential] = useState('');
@@ -17,15 +18,19 @@ function LoginFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.loginUser({ credential, password }))
+    const user = dispatch(sessionActions.loginUser({ credential, password }))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
+    setOpen(!isOpen);
+    return user;
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+    <div className='modal_background'/>
+    <form onSubmit={handleSubmit} className="modal">
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -48,7 +53,9 @@ function LoginFormPage() {
         />
       </label>
       <button type="submit">Log In</button>
+      <button onClick={() => setOpen(!isOpen)}>Close Menu</button>
     </form>
+    </>
   );
 }
 

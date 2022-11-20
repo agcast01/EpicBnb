@@ -1,1 +1,82 @@
 /* TODO Add site wide styles */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 50px;
+    z-index: 10;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.modal label {
+    border: 2px solid rgba(0, 0, 0, .3);
+    border-radius: 10px;
+    height: 30px;
+    margin-bottom: 15px;
+    padding: 8px;
+}
+
+.modal ul {
+    padding: 0;
+}
+
+.modal_background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 10;
+}
+
+body {
+    margin: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+a:hover {
+    border-radius: 10px;
+    background-color: buttonface;
+}
+
+.modal button {
+    border: none;
+    background-color: white;
+    padding:5px;
+}
+.modal button:hover {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: buttonface;
+}
+
+li {
+    list-style-type: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+input, textarea {
+    border: none;
+    margin: 0;
+    text-align: center;
+}
+
+input:focus-visible, textarea:focus-visible {
+    border: none;
+    outline: none;
+}

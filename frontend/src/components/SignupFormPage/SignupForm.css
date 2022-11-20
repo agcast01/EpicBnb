@@ -1,0 +1,22 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
+input {
+    padding-left: 10px;
+    margin: 10px;
+}
+
+button {
+    box-sizing: fit-content;
+    width: fit-content;
+    margin-bottom: 10px;
+}

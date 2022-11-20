@@ -10,10 +10,11 @@ const MySpots = () => {
     }, [dispatch])
 
     const spots = useSelector(state => state.spots)
+    
     return(
         <>
         <ul>
-            {spots && Object.keys(spots).map(id => (
+            { spots && !spots.id && Object.keys(spots).map(id => (
                 <li key={spots[id]}><NavLink to={`/${spots[id].id}`}>{spots[id].name}</NavLink></li>
             ))}
         </ul>

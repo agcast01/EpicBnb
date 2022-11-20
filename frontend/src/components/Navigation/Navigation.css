@@ -1,0 +1,51 @@
+.navbar li a{
+    padding:20px;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+  }
+
+.profile {
+    position: absolute;
+    right: 10px;
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    
+}
+
+.profile:hover {
+    box-shadow: 1px 1px 3px gray;
+    cursor: pointer;
+}
+
+.navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+    padding-bottom: 20px;
+}
+
+#profile-pic {
+    background-color: gray;
+    color: white;
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+    border-radius: 50%;
+}
+
+button {
+    margin-bottom: 0;
+    padding: 5px 15px;
+    background-color: transparent;
+    border: none;
+}

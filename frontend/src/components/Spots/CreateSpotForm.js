@@ -14,7 +14,7 @@ import { useState} from "react";
 import * as spotActions from '../../store/spot';
 import { useDispatch } from "react-redux";
 
-const CreateSpotForm = () => {
+const CreateSpotForm = ({isOpen, setOpen}) => {
     const dispatch = useDispatch()
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -42,80 +42,60 @@ const CreateSpotForm = () => {
         }
 
         dispatch(spotActions.create(payload))
+        setOpen(!isOpen)
     }
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <label>Address</label>
+            <div className="modal_background" />
+            <form onSubmit={handleSubmit} className="modal">
+                <label>Address
                 <input
-                placeholder="address"
                 required
                 value={address}
                 onChange={e => setAddress(e.target.value)}
-                />
-                <label>City</label>
+                /></label>
+                <label>City
                 <input
-                placeholder="city"
                 required
                 value={city}
                 onChange={e => setCity(e.target.value)}
-                />
-                <label>State</label>
+                /></label>
+                <label>State
                 <input
-                placeholder="state"
                 required
                 value={state}
                 onChange={e => setState(e.target.value)}
-                />
-                <label>Country</label>
+                /> </label>
+                <label>Country
                 <input
-                placeholder="country"
                 required
                 value={country}
                 onChange={e => setCountry(e.target.value)}
-                />
-                <label>Latitude</label>
-                <input
-                placeholder="latitude"
-                type="number"
-                required
-                value={lat}
-                min='0'
-                onChange={e => setLat(e.target.value)}
-                />
-                <label>Longitude</label>
-                <input
-                placeholder="longitude"
-                type="number"
-                required
-                value={lng}
-                min='0'
-                onChange={e => setLng(e.target.value)}
-                />
-                <label>Name</label>
+                /> </label>
+                
+                <label>Name
                 <input
                     type="text"
                     required
-                    placeholder="name"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                />
-                <label>Description</label>
+                /> </label>
+                <label>Description
                 <input 
                     type='text'
                     required
-                    placeholder="description"
                     value={description}
                     onChange={e => setDescription(e.target.value)}
-                />
-                <label>Price</label>
+                /> </label>
+                <label>Price
                 <input 
                     type='number'
                     required
                     value={price}
                     onChange={e => setPrice(e.target.value)}
-                />
+                /> </label>
                 <button type="submit">Create new spot</button>
+                <button onClick={() => setOpen(!isOpen)}>Cancel</button>
             </form>
         </>
     )

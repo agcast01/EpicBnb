@@ -1,17 +1,12 @@
-import { useEffect, useState} from "react";
+import { useState} from "react";
 import * as spotActions from '../../store/spot';
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch} from "react-redux";
 
-const EditSpotForm = () => {
+
+const EditSpotForm = ({isOpen, setOpen, spot}) => {
     const dispatch = useDispatch()
-    const history = useHistory()
-    const spot = useSelector(state => state.spots)
-    useEffect(() => {
-        dispatch(spotActions.singleSpot(spotId))
-    }, [dispatch])
 
-    const {spotId} = useParams()
+
 
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -38,81 +33,64 @@ const EditSpotForm = () => {
 
         dispatch(spotActions.edit(spot))
         
-        history.push(`/${spotId}`)
+        setOpen(!isOpen)
     }
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <label>Address</label>
+        <>  
+            <div className="modal_background" />
+            <form onSubmit={handleSubmit} className='modal'>
+                <label>Address
                 <input
-                placeholder="address"
+                placeholder={spot.address}
                 required
-                value={address}
+                value={address || spot.address}
                 onChange={e => setAddress(e.target.value)}
-                />
-                <label>City</label>
+                /></label>
+                <label>City
                 <input
-                placeholder="city"
+                placeholder={spot.city}
                 required
-                value={city}
+                value={city || spot.city}
                 onChange={e => setCity(e.target.value)}
-                />
-                <label>State</label>
+                /></label>
+                <label>State
                 <input
-                placeholder="state"
+                placeholder={spot.state}
                 required
-                value={state}
+                value={state || spot.state}
                 onChange={e => setState(e.target.value)}
-                />
-                <label>Country</label>
+                /></label>
+                <label>Country
                 <input
-                placeholder="country"
+                placeholder={spot.country}
                 required
-                value={country}
+                value={country || spot.country}
                 onChange={e => setCountry(e.target.value)}
-                />
-                <label>Latitude</label>
-                <input
-                placeholder="latitude"
-                type="number"
-                required
-                value={lat}
-                min='0'
-                onChange={e => setLat(e.target.value)}
-                />
-                <label>Longitude</label>
-                <input
-                placeholder="longitude"
-                type="number"
-                required
-                value={lng}
-                min='0'
-                onChange={e => setLng(e.target.value)}
-                />
-                <label>Name</label>
+                /></label>
+                <label>Name
                 <input
                     type="text"
                     required
-                    placeholder="name"
-                    value={name}
+                    placeholder={spot.name}
+                    value={name || spot.name}
                     onChange={e => setName(e.target.value)}
-                />
-                <label>Description</label>
-                <input 
-                    type='text'
+                /></label>
+                <label>Description
+                <textarea
                     required
-                    placeholder="description"
-                    value={description}
+                    placeholder={spot.description}
+                    value={description || spot.description}
                     onChange={e => setDescription(e.target.value)}
-                />
-                <label>Price</label>
+                /></label>
+                <label>Price
                 <input 
                     type='number'
                     required
-                    value={price}
+                    value={price || spot.price}
                     onChange={e => setPrice(e.target.value)}
-                />
+                /></label>
                 <button type="submit">Edit spot</button>
+                <button onClick={() => setOpen(!isOpen)}>Cancel</button>
             </form>
         </>
     )

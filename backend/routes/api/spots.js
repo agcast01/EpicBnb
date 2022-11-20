@@ -178,9 +178,11 @@ router.get('/:spotId/reviews', async (req, res, next) => {
     const { spotId } = req.params;
     const reviews = await Review.findAll({
         where: { spotId },
-        include: {
-            model: ReviewImage
-        }
+        include: [
+            {model: ReviewImage},
+            {model: User}
+        ]
+        
     })
 
     if (!(await Spot.findByPk(spotId))) {
