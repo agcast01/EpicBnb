@@ -4,10 +4,15 @@
     justify-content: center;
 }
 
+.spots li {
+    position: relative;
+}
+
 .imageCard {
     min-width: 300px;
     min-height: 300px;
     border-radius: 10px;
+    background-color: aqua;
 }
 
 .spots li {
@@ -24,4 +29,45 @@
 
 .price {
     font-weight: 500;
+}
+
+.rating {
+    position: absolute;
+    right: 10px;
+}
+
+.details {
+    width: 90%;
+    margin: auto;
+}
+
+.images {
+    min-height: 300px;
+    max-height: 600px;
+    border-radius: 10px;
+    display:grid;
+    grid-template-columns: 49% 49%;
+    gap: 2%;
+    border: 1px solid gray;
+    height: 30%;
+}
+
+.previewImage {
+    height: 100%;
+    background-color: aqua;
+    width: 100%;
+}
+
+.otherImages {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    gap: 4%;
+    grid-template-rows: 48% 48%;
+    row-gap: 4%;
+}
+
+.otherImages img {
+    width: 100%;
+    height: 100%;
+    background-color: aqua;
 }

@@ -21,19 +21,20 @@ const AddReviewForm = ({setOpen, isOpen, spotId}) => {
         <>  
             <div className="modal_background" />
             <form onSubmit={onSubmit} className="modal">
-                <label>Review</label>
-                <textarea
+                <label>Review
+                <input
+                type='text'
                 placeholder="Review"
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
-                />
-                <label>Stars</label>
+                /></label>
+                <label>Stars
                 <input type='number'
                     min='0'
                     max='5'
                     value={stars}
                     onChange={(e) => setStars(e.target.value)}
-                />
+                /></label>
                 <button type='submit'>Submit</button>
                 <button onClick={() => setOpen(!isOpen)}>Cancel</button>
             </form>

@@ -5,11 +5,13 @@ import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import LoginFormPage from '../LoginFormPage';
 import SignupFormPage from '../SignupFormPage/SignupFormPage';
+import CreateSpotForm from '../Spots/CreateSpotForm';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const [loginOpen, setLoginOpen] = useState(false)
   const [signup, setSignup] = useState(false)
+  const [createSpot, setCreateSpot] = useState(false)
 
   const toggleModal = (state, change) => {
     change(!state)
@@ -39,9 +41,11 @@ function Navigation({ isLoaded }){
     <ul className='navbar'>
       <li>
         <NavLink exact to="/">Home</NavLink>
-        
         <span className='right' >
-        <span>EpicBnb your home</span>
+        <span onClick={() => toggleModal(createSpot, setCreateSpot)}>EpicBnb your home</span>
+        {createSpot && (
+          <CreateSpotForm isOpen={createSpot} setOpen={setCreateSpot} />
+        )}
           <span className='profile'>
           {isLoaded && sessionLinks}
           <span className="material-symbols-outlined" id="profile-pic">

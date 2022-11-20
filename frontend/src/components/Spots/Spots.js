@@ -11,6 +11,7 @@ const Spots = () => {
     useEffect(() => {
         dispatch(spotActions.load())
     }, [dispatch])
+
     return (
         <>
         <ul className="spots">
@@ -18,10 +19,16 @@ const Spots = () => {
                 const createdAt = new Date(spots[spotId].createdAt).getTime()
                 const today = new Date().getTime()
                 const weeks = Math.round((today - createdAt) / 604800000)
+                const ratings = Object.values(spots[spotId].Reviews).map(review => review.stars)
+                let avgRating;
+                if(ratings.length) avgRating = ratings.reduce((acc, curr) => acc + curr) / ratings.length;
                 return (
                 <li key={spotId} onClick={() => history.push(`/${spotId}`)} className="listing">
                     <img className='imageCard' source={spots[spotId].previewImage } alt={spots[spotId].name} />
-                    <p className="location">{`${spots[spotId].city}, ${spots[spotId].state}`}</p>
+                    <div>
+                    <span className="location">{`${spots[spotId].city}, ${spots[spotId].state}`}</span>
+                    <span className="rating">★ {avgRating || 5}</span>
+                    </div>
                     <p>Added {weeks} weeks ago</p>
                     <p><span className="price">${spots[spotId].price}</span> night</p>
                 </li>

@@ -10,9 +10,9 @@
     "price": 123
   } */
 
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import * as spotActions from '../../store/spot';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateSpotForm = ({isOpen, setOpen}) => {
     const dispatch = useDispatch()
@@ -25,7 +25,12 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
+    const [previewImage, setPreviewImage] = useState('')
+    const user = useSelector(state => state.session)
 
+    const disabled = Boolean(!user.user);    
+
+    console.log('Disabled: ', disabled)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -45,7 +50,8 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
         setOpen(!isOpen)
     }
     return (
-        <>
+        <>  
+            
             <div className="modal_background" />
             <form onSubmit={handleSubmit} className="modal">
                 <label>Address
@@ -94,7 +100,13 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
                     value={price}
                     onChange={e => setPrice(e.target.value)}
                 /> </label>
-                <button type="submit">Create new spot</button>
+                <label >Preview Image URL
+                    <input type='url'
+                        value={previewImage}
+                        onChange={(e) => setPreviewImage(e.target.value)}
+                    />
+                </label>
+                <button type="submit" disabled={disabled}>Create new spot</button>
                 <button onClick={() => setOpen(!isOpen)}>Cancel</button>
             </form>
         </>

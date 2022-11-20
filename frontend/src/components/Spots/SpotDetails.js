@@ -22,6 +22,19 @@ const SpotDetails = () => {
 
     let reviews = useSelector(state => state.review);
 
+    let avgRating;
+    let reviewers = [];
+    if(reviews) {
+        console.log(reviews)
+        let stars = [...Object.values(reviews).map(review => review.stars)]
+        let total;
+        if(stars.length)total = stars.reduce((acc, cur) => acc + cur)
+        avgRating = total / Object.keys(reviews).length;
+
+        reviewers = Object.values(reviews).map(review => review.userId);
+        console.log('Reviewers: ', reviewers)
+    }
+
     useEffect(() => {
         dispatch(singleSpot(spotId));
         dispatch(reviewActions.spotReviews(spotId));
@@ -29,17 +42,31 @@ const SpotDetails = () => {
 
     return (
         <>
-        {spot && (
-        <>
-            <h2>{spot.name}</h2>
-            <p>Description: {spot.description}</p>
-            <p>Price: ${spot.price}</p>
-            <p>Address: {spot.address}</p>
-            <p>City: {spot.city} </p>
-            <p>State: {spot.state}</p>
-            <p>Country: {spot.country}</p>
+        <div className='details'>
+        {spot && reviews && spot.User &&  (
+        <>  
+            <h2>{spot.name} - {spot.description}</h2>
+            <div className="info">
+                <p>★{avgRating || 5} · {Object.keys(reviews).length} reviews · {spot.city}, {spot.state}, {spot.country}</p>
+            </div>
+            <div class='images'>
+                <img className="previewImage"/>
+                <span className="otherImages">
+                    <img />
+                    <img />
+                    <img />
+                    <img />
+                </span>
+            </div>
+            <div style={{position: 'relative'}}>
+            <h3>House hosted by {spot.User.firstName}</h3>
+            <h4 style= {{position: 'absolute', top: '-20px', right: 0}}>Price: ${spot.price} night</h4>
+            </div>
+
         </>)}
         {reviews && (
+            <>
+            <h3>★{avgRating || 5} · {Object.keys(reviews).length} reviews</h3>
             <ul>
                 {Object.keys(reviews).map(id => (
                     <li key={id}>
@@ -47,6 +74,7 @@ const SpotDetails = () => {
                         {`${reviews[id].stars} Stars: ${reviews[id].review}`}</li>
                 ))}
             </ul>
+            </>
         )}
         {spot && user && user.user.id === spot.ownerId &&
         (<>
@@ -60,7 +88,7 @@ const SpotDetails = () => {
             )}
         </>
         )}
-        {spot && user && user.user.id !== spot.ownerId && (
+        {spot && user && user.user.id !== spot.ownerId && !reviewers.includes(user.user.id) && (
             <>
                 <button onClick={() => setAddReview(!addReview)}>Add Review</button>
                 {addReview && (
@@ -68,6 +96,7 @@ const SpotDetails = () => {
                 )}
             </>
         )}
+        </div>
         </>
     )
 }

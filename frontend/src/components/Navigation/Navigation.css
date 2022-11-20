@@ -35,8 +35,10 @@ span .profile {
 
     border-radius: 30px;
     border: 1px solid rgba(50, 38, 38, 0.3);
-    padding: 5px;
+    padding: 15px 5px 5px 5px;
     height: 50px;
+    position: relative;
+    top: 10px;
 }
 
 .profile:hover {
@@ -61,7 +63,7 @@ span .profile {
 }
 
 button {
-    margin-bottom: 0;
+
     padding: 5px 15px;
     background-color: transparent;
     border: none;

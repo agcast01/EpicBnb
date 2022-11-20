@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
+const { User, Spot, SpotImage, Review, ReviewImage, Booking, Sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { start } = require('repl');
@@ -41,7 +41,12 @@ router.get('/', async (req, res, next) => {
 
     pagination.offset = sizeInt * (pageInt - 1);
 
-    const spots = await Spot.findAll({ where, ...pagination });
+    const spots = await Spot.findAll({ where, ...pagination, 
+        include: {
+        model: Review
+    },
+
+ });
     const data = { Spots: {} }
     spots.forEach(spot => data.Spots[spot.id] = spot);
     res.json(data);
