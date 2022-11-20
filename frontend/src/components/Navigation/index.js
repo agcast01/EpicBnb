@@ -6,6 +6,7 @@ import './Navigation.css';
 import LoginFormPage from '../LoginFormPage';
 import SignupFormPage from '../SignupFormPage/SignupFormPage';
 import CreateSpotForm from '../Spots/CreateSpotForm';
+import logo from '../../images/favicon.ico';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -40,9 +41,9 @@ function Navigation({ isLoaded }){
   return (
     <ul className='navbar'>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/"><img src={logo} alt='logo' style={{width: '30px'}}/>EpicBnB</NavLink>
         <span className='right' >
-        <span onClick={() => toggleModal(createSpot, setCreateSpot)}>EpicBnb your home</span>
+        <span onClick={() => toggleModal(createSpot, setCreateSpot)}>EpicBnB your home</span>
         {createSpot && (
           <CreateSpotForm isOpen={createSpot} setOpen={setCreateSpot} />
         )}

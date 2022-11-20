@@ -1,5 +1,6 @@
 .navbar li a{
-    padding:20px;
+    width:fit-content;
+    font-size: 24px;
 }
 
 .navbar li {
