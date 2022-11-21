@@ -35,8 +35,10 @@ const Spots = () => {
                 return (
                 <li key={spotId} onClick={() => history.push(`/${spotId}`)} className="listing">
                     <div className="imageCard">
-                        <img src={images[spotId - 1] || 'unkown'}/>
-                        {/* <i className="fa-solid fa-house" /> */}
+                        
+                        {(images[spotId - 1] && (<img src={images[spotId - 1] || 'unkown'}/>))
+                            || (<i className="fa-solid fa-house" />)
+                        }
                     </div>
                     <div>
                     <span className="location">{`${spots[spotId].city}, ${spots[spotId].state}`}</span>

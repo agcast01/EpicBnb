@@ -66,7 +66,10 @@ const SpotDetails = () => {
                 <p>★{avgRating || 5} · {Object.keys(reviews).length} reviews · {spot.city}, {spot.state}, {spot.country}</p>
             </div>
             <div className='images'>
-                <img className="previewImage" src={images[spotId - 1]}/>
+
+                {images[spotId - 1] && (<img className="previewImage" src={images[spotId - 1]}/>) ||
+                    (<i className="fa-solid fa-house" id="preview"/>)
+                }
             </div>
             <div style={{position: 'relative'}}>
             <h3>House hosted by {spot.User.firstName}</h3>
