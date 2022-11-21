@@ -22,7 +22,8 @@ const EditReviewForm = ({setOpen, isOpen, currentReview}) => {
             <div className="modal_background" />
             <form onSubmit={onSubmit} className="modal">
                 <label>Review
-                <textarea
+                <input
+                type='text'
                 placeholder="Review"
                 value={review || currentReview.review}
                 onChange={(e) => setReview(e.target.value)}

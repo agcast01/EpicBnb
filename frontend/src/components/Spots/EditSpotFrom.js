@@ -8,15 +8,15 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
 
 
 
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [country, setCountry] = useState('');
-    const [lat, setLat] = useState(0);
-    const [lng, setLng] = useState(0);
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
+    const [address, setAddress] = useState(spot.address);
+    const [city, setCity] = useState(spot.city);
+    const [state, setState] = useState(spot.state);
+    const [country, setCountry] = useState(spot.country);
+    const [lat, setLat] = useState(spot.lat);
+    const [lng, setLng] = useState(spot.lng);
+    const [name, setName] = useState(spot.name);
+    const [description, setDescription] = useState(spot.description);
+    const [price, setPrice] = useState(spot.price);
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,28 +43,28 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
                 <input
                 placeholder={spot.address}
                 required
-                value={address || spot.address}
+                value={address}
                 onChange={e => setAddress(e.target.value)}
                 /></label>
                 <label>City
                 <input
                 placeholder={spot.city}
                 required
-                value={city || spot.city}
+                value={city}
                 onChange={e => setCity(e.target.value)}
                 /></label>
                 <label>State
                 <input
                 placeholder={spot.state}
                 required
-                value={state || spot.state}
+                value={state}
                 onChange={e => setState(e.target.value)}
                 /></label>
                 <label>Country
                 <input
                 placeholder={spot.country}
                 required
-                value={country || spot.country}
+                value={country}
                 onChange={e => setCountry(e.target.value)}
                 /></label>
                 <label>Name
@@ -72,14 +72,15 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
                     type="text"
                     required
                     placeholder={spot.name}
-                    value={name || spot.name}
+                    value={name}
                     onChange={e => setName(e.target.value)}
                 /></label>
                 <label>Description
-                <textarea
+                <input
+                    type='text'
                     required
                     placeholder={spot.description}
-                    value={description || spot.description}
+                    value={description}
                     onChange={e => setDescription(e.target.value)}
                 /></label>
                 <label>Price

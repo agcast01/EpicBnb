@@ -5,7 +5,6 @@ import * as sessionActions from '../../store/session';
 import ProfileModal from "./ProfileModal";
 
 function ProfileButton({ user }) {
-  const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const openMenu = () => {
@@ -42,9 +41,9 @@ function ProfileButton({ user }) {
         <ul className="profile-dropdown">
           <li>{user.user.username}</li>
           <li>{user.user.email}</li>
-          <li>
+         {/*  <li>
             <button onClick={() => history.push(`/profile`)}>Profile Page</button>
-          </li>
+          </li> */}
           <li>
             <button onClick={logout}>Log Out</button>
           </li>

@@ -45,6 +45,7 @@ export const create = (spot) => async dispatch => {
 
     if(response.ok) {
         const newSpot = await response.json();
+        newSpot.Reviews = [];
         dispatch(createSpot(newSpot));
         return response;
     }
@@ -95,19 +96,22 @@ export const deleteSingle = (spotId) => async dispatch => {
 }
 
 const spotReducer = (state = null, action) => {
-    let newState = {}
+    let newState = {...state}
     switch (action.type) {
         case LOAD:
             if(action.spots.Spots) {
-                newState = {...action.spots.Spots}
+                return {...action.spots.Spots}
             }else{
-                newState = {...action.spots};
+                let single = {};
+                single[action.spots.id] = action.spots
+                return  single;
             }
             return newState;
         case CREATE:
-            newState[action.spot.id] = action.spot;
+            newState[action.spot.id] = action.spot
             return newState;
         case DELETE:
+            delete newState[action.spotId]
             return newState;
         default:
             return state;

@@ -58,7 +58,7 @@ export const create = (review, spotId) => async dispatch => {
     })
 
     if(response.ok) {
-        const data = response.json()
+        const data = await response.json()
         dispatch(createReview(data));
         return response;
     }

@@ -6,19 +6,33 @@ import * as reviewActions from '../../store/review';
 import EditSpotForm from "./EditSpotFrom";
 import DeleteSpotForm from "./DeleteSpotForm";
 import AddReviewForm from "../Reviews/AddReviewForm";
+import EditReviewForm from "../Reviews/EditReviewForm";
+import DeleteReviewForm from "../Reviews/DeleteReviewForm";
 
 const SpotDetails = () => {
     const { spotId } = useParams()
     const dispatch = useDispatch()
-    const spot = useSelector(state => state.spots);
-    console.log('Spot: ', spot)
     const [edit, setEdit] = useState(false);
     const [deletePage, setDeletePage] = useState(false);
     const [addReview, setAddReview] = useState(false);
+    const [editReview, setEditReview] = useState(false);
+    const [deleteReview, setDeleteReview] = useState(false);
+
+    useEffect(() => {
+        dispatch(singleSpot(spotId));
+        dispatch(reviewActions.spotReviews(spotId));
+    }, [dispatch, spotId, addReview, editReview, deleteReview, edit])
+
+    const spots = useSelector(state => state.spots);
+    let spot;
+    if(spots && spots[spotId]) spot = spots[spotId]
+    console.log('Spot: ', spot)
+
     
     const session = useSelector(state => state.session)
     let user;
     if(session.user) user = session.user
+    if(user) console.log('User: ', user.user.id)
 
     let reviews = useSelector(state => state.review);
 
@@ -32,13 +46,9 @@ const SpotDetails = () => {
         avgRating = total / Object.keys(reviews).length;
 
         reviewers = Object.values(reviews).map(review => review.userId);
-        console.log('Reviewers: ', reviewers)
     }
 
-    useEffect(() => {
-        dispatch(singleSpot(spotId));
-        dispatch(reviewActions.spotReviews(spotId));
-    }, [dispatch, spotId, addReview])
+
 
     return (
         <>
@@ -49,7 +59,7 @@ const SpotDetails = () => {
             <div className="info">
                 <p>★{avgRating || 5} · {Object.keys(reviews).length} reviews · {spot.city}, {spot.state}, {spot.country}</p>
             </div>
-            <div class='images'>
+            <div className='images'>
                 <img className="previewImage"/>
                 <span className="otherImages">
                     <img />
@@ -64,25 +74,42 @@ const SpotDetails = () => {
             </div>
 
         </>)}
-        {reviews && (
+        {reviews && Object.keys(reviews).length &&(
             <>
             <h3>★{avgRating || 5} · {Object.keys(reviews).length} reviews</h3>
             <ul>
                 {Object.keys(reviews).map(id => (
                     <li key={id}>
+                        {reviews[id].User && reviews[id].User.firstName && (
+                        <>
                         <h4>{`${reviews[id].User.firstName} ${reviews[id].User.lastName}`}</h4>
-                        {`${reviews[id].stars} Stars: ${reviews[id].review}`}</li>
+                        {`${reviews[id].stars} Stars: ${reviews[id].review}`}
+                        {reviews && user && user.user.id === reviews[id].userId && (
+                            <>
+                            <button onClick={() => setEditReview(!editReview)}>Edit Review</button>
+                            {editReview && (
+                                <EditReviewForm isOpen={editReview} setOpen={setEditReview} currentReview={reviews[id]}/>
+                            )}
+                            <button onClick={() => setDeleteReview(!deleteReview)}>Delete Review</button>
+                            {deleteReview && (
+                                <DeleteReviewForm isOpen={deleteReview} setOpen={setDeleteReview} reviewId={id} />
+                            )}
+                            </>
+                        )}
+                        </>
+                )}
+                    </li>
                 ))}
             </ul>
             </>
         )}
         {spot && user && user.user.id === spot.ownerId &&
         (<>
-            <button onClick={() => setEdit(!edit)}>Edit</button>
+            <button onClick={() => setEdit(!edit)}>Edit Spot</button>
             {edit && (
                 <EditSpotForm isOpen={edit} setOpen={setEdit} spot={spot}/>
             )}
-            <button onClick={() => setDeletePage(!deletePage)}>Delete</button>
+            <button onClick={() => setDeletePage(!deletePage)}>Delete Spot</button>
             {deletePage && (
                 <DeleteSpotForm isOpen={deletePage} setOpen={setDeletePage} spot={spot}/>
             )}

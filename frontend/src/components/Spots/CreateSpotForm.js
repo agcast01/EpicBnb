@@ -29,8 +29,7 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
     const user = useSelector(state => state.session)
 
     const disabled = Boolean(!user.user);    
-
-    console.log('Disabled: ', disabled)
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
