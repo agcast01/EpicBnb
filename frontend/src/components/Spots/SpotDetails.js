@@ -8,7 +8,13 @@ import DeleteSpotForm from "./DeleteSpotForm";
 import AddReviewForm from "../Reviews/AddReviewForm";
 import EditReviewForm from "../Reviews/EditReviewForm";
 import DeleteReviewForm from "../Reviews/DeleteReviewForm";
+import spot1 from '../../images/spot-1.jpg'
+import spot2 from '../../images/spot-2.jpg'
+import spot3 from '../../images/spot-3.jpg'
+import spot4 from '../../images/spot-4.jpg'
+import spot5 from '../../images/spot-5.png'
 
+const images = [spot1, spot2, spot3, spot4, spot5]
 const SpotDetails = () => {
     const { spotId } = useParams()
     const dispatch = useDispatch()
@@ -60,13 +66,7 @@ const SpotDetails = () => {
                 <p>★{avgRating || 5} · {Object.keys(reviews).length} reviews · {spot.city}, {spot.state}, {spot.country}</p>
             </div>
             <div className='images'>
-                <img className="previewImage"/>
-                <span className="otherImages">
-                    <img />
-                    <img />
-                    <img />
-                    <img />
-                </span>
+                <img className="previewImage" src={images[spotId - 1]}/>
             </div>
             <div style={{position: 'relative'}}>
             <h3>House hosted by {spot.User.firstName}</h3>
