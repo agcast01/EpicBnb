@@ -26,13 +26,13 @@ const SpotDetails = () => {
     const spots = useSelector(state => state.spots);
     let spot;
     if(spots && spots[spotId]) spot = spots[spotId]
-    console.log('Spot: ', spot)
+
 
     
     const session = useSelector(state => state.session)
     let user;
     if(session.user) user = session.user
-    if(user) console.log('User: ', user.user.id)
+
 
     let reviews = useSelector(state => state.review);
 

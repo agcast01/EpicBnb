@@ -106,7 +106,7 @@ const spotReducer = (state = null, action) => {
                 single[action.spots.id] = action.spots
                 return  single;
             }
-            return newState;
+
         case CREATE:
             newState[action.spot.id] = action.spot
             return newState;
