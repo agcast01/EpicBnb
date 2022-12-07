@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production') {
 const bcrypt = require("bcryptjs");
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -17,7 +17,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     return queryInterface.bulkInsert(options, [
+    options.tableName = 'Users';
+    return queryInterface.bulkInsert(options, [
       {
         email: 'demo@user.io',
         username: 'Demo-lition',
@@ -47,7 +48,7 @@ module.exports = {
         lastName: 'Cottontail'
       },
       {
-        email:'user4@user.io',
+        email: 'user4@user.io',
         username: 'FakeUser4',
         hashedPassword: (bcrypt.hashSync('password5')),
         firstName: 'Ricardo',
@@ -56,17 +57,17 @@ module.exports = {
     ], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     const Op = Sequelize.Op;
-     options.tableName = 'Users';
-     return queryInterface.bulkDelete(options, {
-       username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2', 'FakeUser3', 'FakeUser4'] }
-     }, {});
+    const Op = Sequelize.Op;
+    options.tableName = 'Users';
+    return queryInterface.bulkDelete(options, {
+      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2', 'FakeUser3', 'FakeUser4'] }
+    }, {});
   }
 };

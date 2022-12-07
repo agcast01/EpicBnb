@@ -16,6 +16,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+     options.tableName = 'Spots';
    return queryInterface.bulkInsert(options, [
     {
       ownerId: 1,
