@@ -19,26 +19,6 @@ function Navigation({ isLoaded }){
   }
 
   let sessionLinks;
-  useEffect(() => {
-    if (sessionUser) {
-      sessionLinks = (
-        <ProfileButton user={sessionUser} />
-      );
-  } else {
-      sessionLinks = (
-        <>
-          <button onClick={() => toggleModal(loginOpen, setLoginOpen)}>Log In</button>
-          {loginOpen && (
-            <LoginFormPage isOpen={loginOpen} setOpen={setLoginOpen}/>
-          )}
-          <button onClick={() => toggleModal(signup, setSignup)}>Signup</button>
-          {signup && (
-            <SignupFormPage isOpen={signup} setOpen={setSignup}/>
-          )}
-        </>
-      );
-  }
-  }, [signup])
   if (sessionUser) {
       sessionLinks = (
         <ProfileButton user={sessionUser} />
@@ -52,7 +32,7 @@ function Navigation({ isLoaded }){
           )}
           <button onClick={() => toggleModal(signup, setSignup)}>Signup</button>
           {signup && (
-            <SignupFormPage isOpen={signup} setOpen={setSignup}/>
+            <SignupFormPage isOpen={signup} setOpen={setSignup} user={sessionUser}/>
           )}
         </>
       );

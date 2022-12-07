@@ -1,5 +1,8 @@
 'use strict';
-
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 /** @type {import('sequelize-cli').Migration} */
 const bcrypt = require("bcryptjs");
 
@@ -61,7 +64,8 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
      const Op = Sequelize.Op;
-     return queryInterface.bulkDelete('Users', {
+     options.tableName = 'Users';
+     return queryInterface.bulkDelete(options, {
        username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2', 'FakeUser3', 'FakeUser4'] }
      }, {});
   }

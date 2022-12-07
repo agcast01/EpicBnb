@@ -1,9 +1,14 @@
 'use strict';
 
 const { all } = require('../../app');
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Bookings', {
       id: {
@@ -40,14 +45,15 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       }
-    });
+    }, options);
 
     await queryInterface.addIndex('Bookings', ['spotId', 'startDate', 'endDate'], {
       unique: true
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Bookings');
-    await queryInterface.removeIndex('Bookings', ['spotId', 'startDate', 'endDate'])
+    options.tableName = 'Bookings';
+    await queryInterface.dropTable(options);
+    await queryInterface.removeIndex(options, ['spotId', 'startDate', 'endDate'])
   }
 };
