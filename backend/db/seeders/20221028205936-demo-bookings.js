@@ -15,7 +15,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   return queryInterface.bulkInsert('Bookings', [
+   return queryInterface.bulkInsert(options, [
     {
       spotId:1,
       userId:2,

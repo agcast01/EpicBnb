@@ -16,7 +16,7 @@ module.exports = {
      * }], {});
     */
 
-    return queryInterface.bulkInsert( 'Reviews',
+    return queryInterface.bulkInsert( options,
       [
         {
           userId: 1,

@@ -16,7 +16,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   return queryInterface.bulkInsert('Spots', [
+   return queryInterface.bulkInsert(options, [
     {
       ownerId: 1,
       address: '123 Hilly Road',
