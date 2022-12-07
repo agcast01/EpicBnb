@@ -53,9 +53,9 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', requireAuth, validatePost, async (req, res, next) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
     const ownerId = req.user.id;
-    const newSpot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price });
+    const newSpot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price, previewImage });
 
     return res.json(newSpot);
 })

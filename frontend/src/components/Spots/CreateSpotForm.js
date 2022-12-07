@@ -42,7 +42,8 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
             lng,
             name,
             description,
-            price
+            price,
+            previewImage
         }
 
         dispatch(spotActions.create(payload))
