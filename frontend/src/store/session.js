@@ -54,7 +54,7 @@ export const userSignUp = (user) => async dispatch => {
 
     if(response.ok) {
         const newUser = await response.json();
-        signup(newUser);
+        dispatch(signup(newUser));
         return response;
     }
 }

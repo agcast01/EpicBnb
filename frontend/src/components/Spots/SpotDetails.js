@@ -70,7 +70,7 @@ const SpotDetails = () => {
         </>)}
         {reviews && Object.keys(reviews).length &&(
             <>
-            <h3>★{avgRating || 5} · {Object.keys(reviews).length} reviews</h3>
+            <h3>★{avgRating || 0} · {Object.keys(reviews).length} reviews</h3>
             <ul>
                 {Object.keys(reviews).map(id => (
                     <li key={id}>

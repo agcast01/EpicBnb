@@ -35,7 +35,7 @@ const Spots = () => {
                     </div>
                     <div>
                     <span className="location">{`${spots[spotId].city}, ${spots[spotId].state}`}</span>
-                    <span className="rating">★ {avgRating || 5}</span>
+                    <span className="rating">★ {avgRating || 0}</span>
                     </div>
                     <p>Added {weeks} weeks ago</p>
                     <p><span className="price">${spots[spotId].price}</span> night</p>
