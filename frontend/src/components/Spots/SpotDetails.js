@@ -68,7 +68,7 @@ const SpotDetails = () => {
             </div>
 
         </>)}
-        {reviews && Object.keys(reviews).length &&(
+        {reviews && Boolean(Object.keys(reviews).length) &&(
             <>
             <h3>★{avgRating || 0} · {Object.keys(reviews).length} reviews</h3>
             <ul>

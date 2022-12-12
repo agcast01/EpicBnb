@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import * as spotActions from '../../store/spot';
 import { useDispatch} from "react-redux";
 
@@ -17,7 +17,18 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
     const [name, setName] = useState(spot.name);
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
+    const [errors, setErrors] = useState([])
     
+    useEffect(() => {
+        let newErrors = [];
+        if(address.length > 50) newErrors.push("Address must be less than 50 characters");
+        if(city.length > 25) newErrors.push("City must be less than 25 characters");
+        if(state.length > 25) newErrors.push("State must be less than 25 characters");
+        if(country.length > 25) newErrors.push("Country must be less than 25 characters");
+        if(name.length > 25) newErrors.push("Name must be less than 25 characters");
+        setErrors(newErrors);
+    }, [address, city, state, country, name])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -39,6 +50,11 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
         <>  
             <div className="modal_background" />
             <form onSubmit={handleSubmit} className='modal'>
+            <ul className='errors'>{Boolean(errors.length) && 
+                    errors.map(error => (
+                        <li>{error}</li>
+                    ))
+                }</ul>
                 <label>Address
                 <input
                 placeholder={spot.address}

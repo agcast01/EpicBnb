@@ -30,7 +30,7 @@ const EditReviewForm = ({setOpen, isOpen, currentReview}) => {
                 /></label>
                 <label>Stars
                 <input type='number'
-                    min='0'
+                    min='1'
                     max='5'
                     value={stars || currentReview.stars}
                     onChange={(e) => setStars(e.target.value)}

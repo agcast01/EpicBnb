@@ -26,9 +26,20 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
     const [previewImage, setPreviewImage] = useState('')
+    const [errors, setErrors] = useState([]);
     const user = useSelector(state => state.session)
 
     const disabled = Boolean(!user.user);    
+
+    useEffect(() => {
+        let newErrors = [];
+        if(address.length > 50) newErrors.push("Address must be less than 50 characters");
+        if(city.length > 25) newErrors.push("City must be less than 25 characters");
+        if(state.length > 25) newErrors.push("State must be less than 25 characters");
+        if(country.length > 25) newErrors.push("Country must be less than 25 characters");
+        if(name.length > 25) newErrors.push("Name must be less than 25 characters");
+        setErrors(newErrors);
+    }, [address, city, state, country, name])
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,6 +65,11 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
             
             <div className="modal_background" />
             <form onSubmit={handleSubmit} className="modal">
+                <ul className='errors'>{Boolean(errors.length) && 
+                    errors.map(error => (
+                        <li>{error}</li>
+                    ))
+                }</ul>
                 <label>Address
                 <input
                 required
@@ -106,7 +122,7 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
                         onChange={(e) => setPreviewImage(e.target.value)}
                     />
                 </label>
-                <button type="submit" disabled={disabled}>Create new spot</button>
+                <button type="submit" disabled={disabled || Boolean(errors.length)}>Create new spot</button>
                 <button onClick={() => setOpen(!isOpen)}>Cancel</button>
             </form>
         </>

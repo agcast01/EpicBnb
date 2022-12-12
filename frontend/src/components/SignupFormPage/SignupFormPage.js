@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -14,7 +14,16 @@ function SignupFormPage({setOpen, isOpen, user}) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
+  useEffect(() => {
+    let newErrors = [];
+    if(username.length > 20) newErrors.push("Username must be less than 20 characters");
+    if(password.length < 8) newErrors.push("Password must be more than 8 characters");
+    setErrors(newErrors);
+  }, [username, password])
+
   if (sessionUser) return <Redirect to="/" />;
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,7 +102,7 @@ function SignupFormPage({setOpen, isOpen, user}) {
           required
         />
       </label>
-      <button type="submit">Sign Up</button>
+      <button type="submit" disabled={Boolean(errors.length)}>Sign Up</button>
       <button onClick={() => setOpen(!isOpen)}>Cancel</button>
     </form>
     </>

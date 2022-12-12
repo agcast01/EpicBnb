@@ -34,30 +34,13 @@ function App() {
       <Route exact path='/'>
         <Spots />
       </Route>
-      <Route path="/login">
-        <LoginFormPage />
-      </Route>
-      <Route path="/signup">
-        <SignupFormPage />
-      </Route>
-      <Route path="/addSpot">
-        <CreateSpotForm />
-      </Route>
       <Route path='/profile'>
         <ProfilePage />
       </Route>
       <Route exact path='/:spotId'>
         <SpotDetails />
       </Route>
-      <Route path='/editSpot/:spotId'>
-        <EditSpotForm />
-      </Route>
-      <Route path='/deleteSpot/:spotId'>
-        <DeleteSpotForm />
-      </Route>
-      <Route path = '/editReview/:reviewId'>
-        <EditReviewForm />
-      </Route>
+
     </Switch>)}
     
     </>
