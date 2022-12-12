@@ -16,11 +16,13 @@ const EditReviewForm = ({setOpen, isOpen, currentReview}) => {
 
         dispatch(reviewActions.edit(newReview, currentReview.id))
         setOpen(!isOpen)
+        return newReview;
     }
     return(
         <>  
             <div className="modal_background" />
-            <form onSubmit={onSubmit} className="modal">
+            <div className="modal">
+            <form onSubmit={onSubmit}>
                 <label>Review
                 <input
                 type='text'
@@ -38,6 +40,7 @@ const EditReviewForm = ({setOpen, isOpen, currentReview}) => {
                 <button type='submit'>Submit</button>
                 <button onClick={() => setOpen(!isOpen)}>Cancel</button>
             </form>
+            </div>
         </>
     )
 }

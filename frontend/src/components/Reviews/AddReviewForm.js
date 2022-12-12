@@ -16,6 +16,7 @@ const AddReviewForm = ({setOpen, isOpen, spotId}) => {
         
         dispatch(reviewActions.create(newReview, spotId)) 
         setOpen(!isOpen)
+        return newReview;
     }
     return(
         <>  

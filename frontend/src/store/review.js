@@ -92,14 +92,16 @@ export const remove = (reviewId) => async dispatch => {
 }
 
 
-const reviewReducer = (state = null, action) => {
+const reviewReducer = (state = {}, action) => {
+    let newState = {...state};
     switch (action.type) {
         case LOAD:
             return action.reviews;
         case CREATE:
-            return action.review;
+            newState[action.review.id] = action.review;
+            return newState;
         case DELETE:
-            const newState = {...state};
+            newState = {...state};
             delete newState[action.reviewId]
             return newState;
         default:
