@@ -9,6 +9,8 @@ const DeleteReviewForm = ({isOpen, setOpen, reviewId}) => {
 
         dispatch(reviewActions.remove(reviewId))
         setOpen(!isOpen)
+
+        return 'success';
     }   
     return (
         <>
