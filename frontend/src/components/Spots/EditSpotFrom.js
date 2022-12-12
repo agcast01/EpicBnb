@@ -49,7 +49,8 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
     return (
         <>  
             <div className="modal_background" />
-            <form onSubmit={handleSubmit} className='modal'>
+            <div className="modal">
+            <form onSubmit={handleSubmit}>
             <ul className='errors'>{Boolean(errors.length) && 
                     errors.map(error => (
                         <li>{error}</li>
@@ -109,6 +110,7 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
                 <button type="submit">Edit spot</button>
                 <button onClick={() => setOpen(!isOpen)}>Cancel</button>
             </form>
+            </div>
         </>
     )
 }
