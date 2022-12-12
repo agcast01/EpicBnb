@@ -13,13 +13,15 @@ const DeleteReviewForm = ({isOpen, setOpen, reviewId}) => {
     return (
         <>
         <div className="modal_background" />
-        <form className="modal" onSubmit={onSubmit}>
+        <div className='modal'>
+        <form onSubmit={onSubmit}>
             <p>Are you sure you want to delete this review?</p>
             <div>
                 <button type="submit">Yes</button>
                 <button onClick={() => setOpen(!isOpen)}>No</button>
             </div>
         </form>
+        </div>
         </>
     )
 }

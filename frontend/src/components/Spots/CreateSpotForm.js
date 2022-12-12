@@ -64,67 +64,70 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
         <>  
             
             <div className="modal_background" />
-            <form onSubmit={handleSubmit} className="modal">
+            <div className="modal">
                 <ul className='errors'>{Boolean(errors.length) && 
-                    errors.map(error => (
-                        <li>{error}</li>
-                    ))
-                }</ul>
-                <label>Address
-                <input
-                required
-                value={address}
-                onChange={e => setAddress(e.target.value)}
-                /></label>
-                <label>City
-                <input
-                required
-                value={city}
-                onChange={e => setCity(e.target.value)}
-                /></label>
-                <label>State
-                <input
-                required
-                value={state}
-                onChange={e => setState(e.target.value)}
-                /> </label>
-                <label>Country
-                <input
-                required
-                value={country}
-                onChange={e => setCountry(e.target.value)}
-                /> </label>
-                
-                <label>Name
-                <input
-                    type="text"
+                        errors.map(error => (
+                            <li>{error}</li>
+                        ))
+                    }</ul>
+                <form onSubmit={handleSubmit}>
+                    
+                    <label>Address
+                    <input
                     required
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                /> </label>
-                <label>Description
-                <input 
-                    type='text'
+                    value={address}
+                    onChange={e => setAddress(e.target.value)}
+                    /></label>
+                    <label>City
+                    <input
                     required
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                /> </label>
-                <label>Price
-                <input 
-                    type='number'
+                    value={city}
+                    onChange={e => setCity(e.target.value)}
+                    /></label>
+                    <label>State
+                    <input
                     required
-                    value={price}
-                    onChange={e => setPrice(e.target.value)}
-                /> </label>
-                <label >Preview Image URL
-                    <input type='url'
-                        value={previewImage}
-                        onChange={(e) => setPreviewImage(e.target.value)}
-                    />
-                </label>
-                <button type="submit" disabled={disabled || Boolean(errors.length)}>Create new spot</button>
-                <button onClick={() => setOpen(!isOpen)}>Cancel</button>
-            </form>
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    /> </label>
+                    <label>Country
+                    <input
+                    required
+                    value={country}
+                    onChange={e => setCountry(e.target.value)}
+                    /> </label>
+                    
+                    <label>Name
+                    <input
+                        type="text"
+                        required
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                    /> </label>
+                    <label>Description
+                    <input 
+                        type='text'
+                        required
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                    /> </label>
+                    <label>Price
+                    <input 
+                        type='number'
+                        required
+                        value={price}
+                        onChange={e => setPrice(e.target.value)}
+                    /> </label>
+                    <label >Preview Image URL
+                        <input type='url'
+                            value={previewImage}
+                            onChange={(e) => setPreviewImage(e.target.value)}
+                        />
+                    </label>
+                    <button type="submit" disabled={disabled || Boolean(errors.length)}>Create new spot</button>
+                    <button onClick={() => setOpen(!isOpen)}>Cancel</button>
+                </form>
+            </div>
         </>
     )
 }

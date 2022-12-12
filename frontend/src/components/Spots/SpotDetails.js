@@ -61,6 +61,12 @@ const SpotDetails = () => {
             </div>
             <div className='images'>
                 <img className="previewImage" src={spot.previewImage}/>
+                <div className='otherImages'>
+                    <div />
+                    <div />
+                    <div />
+                    <div />
+                </div>
             </div>
             <div style={{position: 'relative'}}>
             <h3>House hosted by {spot.User.firstName}</h3>
