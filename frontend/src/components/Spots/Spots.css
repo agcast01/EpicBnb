@@ -129,3 +129,21 @@
 .reviews-buttons button:hover {
     background-color: rgb(255, 85, 85);
 }
+
+.spot-image {
+    position: relative;
+}
+
+.spot-image > .material-symbols-outlined {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: transparent;
+}
+
+.spot-image > .material-symbols-outlined:hover {
+    color: black;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+    background-color: white;
+}

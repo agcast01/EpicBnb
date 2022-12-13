@@ -63,10 +63,22 @@ const SpotDetails = () => {
             <div className='images'>
                 <img className="previewImage" src={spot.previewImage}/>
                 <div className='otherImages'>
-                    <img src={spot.SpotImages[0] || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'}/>
-                    <img src={spot.SpotImages[1] || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'}/>
-                    <img src={spot.SpotImages[2] || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'}/>
-                    <img src={spot.SpotImages[3] || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'}/>
+                    <div className="spot-image">
+                        <img src={spot.SpotImages[0] || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'}/>
+                        {/* <span className="material-symbols-outlined" >more_horiz</span> */}
+                    </div>
+                    <div className="spot-image">
+                        <img src={spot.SpotImages[1] || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'}/>
+                        {/* <span className="material-symbols-outlined" >more_horiz</span> */}
+                    </div>
+                    <div className="spot-image">
+                        <img src={spot.SpotImages[2] || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'}/>
+                        {/* <span className="material-symbols-outlined" >more_horiz</span> */}
+                    </div>
+                    <div className="spot-image">
+                        <img src={spot.SpotImages[3] || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'}/>
+                        {/* <span className="material-symbols-outlined" >more_horiz</span> */}
+                    </div>
                 </div>
             </div>
             <div style={{position: 'relative'}}>
