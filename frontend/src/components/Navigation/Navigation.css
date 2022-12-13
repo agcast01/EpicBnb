@@ -78,9 +78,13 @@ button {
     padding: 20px;
     text-align: left;
     top: 50px;
-    left: 0;
+    left: -10px;
 }
 
 .profile-dropdown li {
     padding: 10px;
+}
+
+#logo:hover {
+    background-color: transparent;
 }

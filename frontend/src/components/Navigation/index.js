@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -43,7 +43,7 @@ function Navigation({ isLoaded }){
   return (
     <ul className='navbar'>
       <li>
-        <NavLink exact to="/" style={{color: '#F55'}}><img src={logo} alt='logo' style={{width: '30px'}}/>EpicBnB</NavLink>
+        <NavLink exact to="/" style={{color: '#F55'}} id='logo'><img src={logo} alt='logo' style={{width: '30px'}}/>EpicBnB</NavLink>
         <span className='right' >
         <span onClick={() => toggleModal(createSpot, setCreateSpot)}>EpicBnB your home</span>
         {createSpot && (

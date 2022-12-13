@@ -81,7 +81,7 @@ export const edit = (review, id) => async dispatch => {
 }
 
 export const remove = (reviewId) => async dispatch => {
-    const response = csrfFetch(`/api/reviews/${reviewId}`, {
+    const response = csrfFetch(`/api/reviews/${Number(reviewId)}`, {
         method: 'DELETE',
     });
 
@@ -103,7 +103,7 @@ const reviewReducer = (state = {}, action) => {
         case DELETE:
             newState = {...state};
             delete newState[action.reviewId]
-            console.log('Delete State', newState)
+            console.log('Delete State:', newState)
             return newState;
         default:
             return state;

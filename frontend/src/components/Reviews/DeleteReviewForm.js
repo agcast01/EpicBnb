@@ -6,7 +6,7 @@ const DeleteReviewForm = ({isOpen, setOpen, reviewId}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(reviewActions.remove(reviewId))
+        dispatch(reviewActions.remove(Number(reviewId)))
         setOpen(!isOpen)
         return 'success';
     }   
