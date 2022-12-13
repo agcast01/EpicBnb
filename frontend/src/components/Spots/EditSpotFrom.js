@@ -50,6 +50,7 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
         <>  
             <div className="modal_background" />
             <div className="modal">
+                <h2>Edit {spot.name}</h2>
             <form onSubmit={handleSubmit}>
             <ul className='errors'>{Boolean(errors.length) && 
                     errors.map(error => (

@@ -28,7 +28,6 @@
 
 .right>span:hover {
     border-radius: 30px;
-    background-color: rgba(0, 0, 0, .1);
     cursor: pointer;
 }
 
@@ -68,4 +67,20 @@ button {
     padding: 5px 15px;
     background-color: transparent;
     border: none;
+}
+
+.profile-dropdown {
+    border-radius: 10px;
+    z-index: 2;
+    background-color: white;
+    box-shadow: 1px 1px 3px black;
+    position:absolute;
+    padding: 20px;
+    text-align: left;
+    top: 50px;
+    left: 0;
+}
+
+.profile-dropdown li {
+    padding: 10px;
 }

@@ -78,10 +78,10 @@
     row-gap: 4%;
 }
 
-.otherImages div {
+.otherImages img {
     width: 100%;
     height: 100%;
-    background-color: aqua;
+    border-radius: 10px;
 }
 
 .details button:hover {
@@ -95,4 +95,37 @@
     background-color: rgba(0, 0, 0, .1);
     border-radius: 10px;
     position: relative;
+}
+
+.reviews {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.reviews li {
+    width: 45%;
+    margin-bottom: 20px;
+}
+
+.reviews-buttons {
+    padding: 15px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.reviews-buttons button {
+    background-color: rgb(255, 85, 85);
+    border-radius: 30px;
+    color: white;
+    width: 40%;
+    height: 30px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.reviews-buttons button:hover {
+    background-color: rgb(255, 85, 85);
 }

@@ -44,7 +44,9 @@ function SignupFormPage({setOpen, isOpen, user}) {
   return (
     <>
     <div className="modal_background"/>
-    <form onSubmit={handleSubmit} className="modal">
+    <div className="modal">
+      <h2>Signup to EpicBnB</h2>
+    <form onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -105,6 +107,7 @@ function SignupFormPage({setOpen, isOpen, user}) {
       <button type="submit" disabled={Boolean(errors.length)}>Sign Up</button>
       <button onClick={() => setOpen(!isOpen)}>Cancel</button>
     </form>
+    </div>
     </>
   );
 }

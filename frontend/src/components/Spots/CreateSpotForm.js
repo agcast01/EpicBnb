@@ -65,6 +65,7 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
             
             <div className="modal_background" />
             <div className="modal">
+                <h2>EpicBnB your home today</h2>
                 <ul className='errors'>{Boolean(errors.length) && 
                         errors.map(error => (
                             <li>{error}</li>

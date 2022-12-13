@@ -27,10 +27,17 @@ function LoginFormPage({isOpen, setOpen}) {
     return user;
   }
 
+  const demoUser = () => {
+    const user = dispatch(sessionActions.loginUser({credential: 'demo@user.io', password: 'password'}))
+    return user;
+  }
+
   return (
     <>
     <div className='modal_background'/>
-    <form onSubmit={handleSubmit} className="modal">
+    <div className='modal'>
+    <form onSubmit={handleSubmit}>
+      <h2>Login to EpicBnB</h2>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -53,8 +60,10 @@ function LoginFormPage({isOpen, setOpen}) {
         />
       </label>
       <button type="submit">Log In</button>
+      <button onClick={demoUser}>Demo User</button>
       <button onClick={() => setOpen(!isOpen)}>Close Menu</button>
     </form>
+    </div>
     </>
   );
 }

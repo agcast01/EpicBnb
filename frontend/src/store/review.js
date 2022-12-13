@@ -40,7 +40,6 @@ export const spotReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
     if(response.ok) {
         const data = await response.json();
-        console.log('Data: ', data)
         const reviews = {};
         data.Reviews.forEach(review => {reviews[review.id] = review});
         dispatch(loadReviews(reviews));

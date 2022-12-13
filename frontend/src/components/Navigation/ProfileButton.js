@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import ProfileModal from "./ProfileModal";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -36,21 +35,20 @@ function ProfileButton({ user }) {
       </span>
       </button>
       {showMenu && (
-        <ProfileModal>
         <ul className="profile-dropdown">
           <li>{user.user.username}</li>
           <li>{user.user.email}</li>
          {/*  <li>
             <button onClick={() => history.push(`/profile`)}>Profile Page</button>
           </li> */}
+          
           <li>
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>
-        </ ProfileModal>
       )}
     </>
   );
 }
 
-export default ProfileButton;
+export default ProfileButton; 
