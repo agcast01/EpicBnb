@@ -87,7 +87,8 @@ export const remove = (reviewId) => async dispatch => {
     });
 
     if(response.ok) {
-        dispatch(deleteReview())
+        dispatch(deleteReview(Number(reviewId)))
+        return 'success';
     }
 }
 
@@ -103,6 +104,7 @@ const reviewReducer = (state = {}, action) => {
         case DELETE:
             newState = {...state};
             delete newState[action.reviewId]
+            console.log('Delete State', newState)
             return newState;
         default:
             return state;

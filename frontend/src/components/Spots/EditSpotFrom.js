@@ -107,7 +107,7 @@ const EditSpotForm = ({isOpen, setOpen, spot}) => {
                     value={price || spot.price}
                     onChange={e => setPrice(e.target.value)}
                 /></label>
-                <button type="submit">Edit spot</button>
+                <button disabled={Boolean(errors.length)} type="submit">Edit spot</button>
                 <button onClick={() => setOpen(!isOpen)}>Cancel</button>
             </form>
             </div>

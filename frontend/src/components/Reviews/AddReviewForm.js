@@ -35,7 +35,7 @@ const AddReviewForm = ({setOpen, isOpen, spotId}) => {
                         min='1'
                         max='5'
                         value={stars}
-                        onChange={(e) => setStars(e.target.value)}
+                        onChange={(e) => setStars(Number(e.target.value))}
                     /></label>
                     <button type='submit'>Submit</button>
                     <button onClick={() => setOpen(!isOpen)}>Cancel</button>
