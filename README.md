@@ -1,6 +1,6 @@
 # EpicBnB
 
-__Live Site__ : https://airbnb-alex-castillo.herokuapp.com/
+__Live Site__ : https://epicbnb.onrender.com
 
 My site is EpicBnb. This site is intended to allow hosts to get their locations out into a viewable space, where users are then able to go and find them.
 It is also a space to share those experiences as reviews so that users may get an idea of what they will be going into.
