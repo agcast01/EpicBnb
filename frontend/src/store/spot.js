@@ -95,6 +95,37 @@ export const deleteSingle = (spotId) => async dispatch => {
     }
 }
 
+export const addSpotImage = (spot, url, preview = false) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spot.id}/images`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            url,
+            preview}
+        )
+    });
+    if(response.ok) {
+        const newImage = await response.json();
+        spot.SpotImages.push(newImage);
+        dispatch(createSpot(spot));
+        return response
+    }
+}
+
+export const deleteSpotImage = (imageId, slot, spot) => async dispatch => {
+    const response = await csrfFetch(`/api/spot-images/${imageId}`, {
+        method: 'DELETE'
+    });
+
+    if(response.ok) {
+        const newArr = spot.SpotImages.splice(slot, 1);
+        dispatch(createSpot(spot));
+        return response;
+    }
+}
+
 const spotReducer = (state = null, action) => {
     let newState = {...state}
     switch (action.type) {
