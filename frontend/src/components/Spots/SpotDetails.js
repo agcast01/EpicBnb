@@ -92,8 +92,8 @@ const SpotDetails = () => {
         <>
             <div className='details'>
                 {spot && reviews && spot.User && (
-                    <div className='spot-section'>
-                        <h2>{spot.name}</h2>
+                    <>
+                        <h2>{spot.name} - {spot.description}</h2>
                         <div className="info">
                             <p>★{avgRating || 0} · {Object.keys(reviews).length} reviews · {spot.city}, {spot.state}, {spot.country}</p>
                         </div>
@@ -139,14 +139,9 @@ const SpotDetails = () => {
                             <h4 style={{ position: 'absolute', top: '-20px', right: 0 }}>Price: ${spot.price} night</h4>
                         </div>
                         {showModal()}
-                    </div>)}
-                    {spot && (
-                        <div className="spot-section">
-                            {spot.description}
-                        </div>
-                    )}
+                    </>)}
                 {reviews && Boolean(Object.keys(reviews).length) && (
-                    <div>
+                    <>
                         <h3>★{avgRating || 0} · {Object.keys(reviews).length} reviews</h3>
                         <ul className="reviews">
                             {Object.keys(reviews).map(id => (
@@ -154,7 +149,7 @@ const SpotDetails = () => {
                                     {reviews[id].User && reviews[id].User.firstName && (
                                         <>
                                             <h4>{`${reviews[id].User.firstName} ${reviews[id].User.lastName}`}</h4>
-                                            <p>{`${reviews[id].stars} Stars: ${reviews[id].review}`}</p>
+                                            {`${reviews[id].stars} Stars: ${reviews[id].review}`}
                                             {reviews && user && user.user.id === reviews[id].userId && (
                                                 <div className='reviews-buttons'>
                                                     <button onClick={() => setEditReview(!editReview)}>Edit Review</button>
@@ -172,7 +167,7 @@ const SpotDetails = () => {
                                 </li>
                             ))}
                         </ul>
-                    </div>
+                    </>
                 )}
                 {spot && user && user.user.id === spot.ownerId &&
                     (<div className="reviews-buttons">
