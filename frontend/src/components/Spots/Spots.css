@@ -109,6 +109,16 @@
 .reviews li {
     width: 45%;
     margin-bottom: 20px;
+
+}
+
+.reviews li p {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.reviews li p:hover {
+    overflow:auto;
 }
 
 .reviews-buttons {
@@ -167,4 +177,9 @@
 
 .image-options li:hover {
     cursor: pointer;
+}
+
+.spot-section {
+    border-bottom: solid 1px rgba(0, 0, 0, .1);
+    padding: 20px;
 }
