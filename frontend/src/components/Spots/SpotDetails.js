@@ -95,7 +95,7 @@ const SpotDetails = () => {
                     <div className='spot-section'>
                         <h2>{spot.name}</h2>
                         <div className="info">
-                            <p>★{avgRating || 5} · {Object.keys(reviews).length} reviews · {spot.city}, {spot.state}, {spot.country}</p>
+                            <p>★{avgRating || 0} · {Object.keys(reviews).length} reviews · {spot.city}, {spot.state}, {spot.country}</p>
                         </div>
                         <div className='images'>
                             <img className="previewImage" src={spot.previewImage} />
