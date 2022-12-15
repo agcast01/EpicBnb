@@ -265,19 +265,6 @@ module.exports = {
       price: 400,
       previewImage: 'https://images.pexels.com/photos/2371975/pexels-photo-2371975.jpeg?auto=compress&cs=tinysrgb&w=1600'
     },
-    {
-      ownerId: 20,
-      address: '123 Farmers Market',
-      city: 'Bowling Green',
-      state: 'Kentucky',
-      country: 'United States',
-      lat: 38.2527,
-      lng: 85.7585,
-      name: 'Barn',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      price: 400,
-      previewImage: 'https://images.pexels.com/photos/2893177/pexels-photo-2893177.jpeg?auto=compress&cs=tinysrgb&w=1600'
-    },
    ])
   },
 
