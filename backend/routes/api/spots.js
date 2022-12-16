@@ -174,7 +174,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
             statusCode: 403
         })
     }
-    const newReview = await Review.create({ review, stars, spotId, userId: req.user.id });
+    const newReview = await Review.create({ review, stars, spotId: Number(spotId), userId: req.user.id });
 
     return res.json(newReview)
 })
