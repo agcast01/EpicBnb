@@ -18,8 +18,9 @@ function SignupFormPage({setOpen, isOpen, user}) {
     let newErrors = [];
     if(username.length > 20) newErrors.push("Username must be less than 20 characters");
     if(password.length < 8) newErrors.push("Password must be more than 8 characters");
+    if(!email.includes('@')) newErrors.push("Must be a valid email.")
     setErrors(newErrors);
-  }, [username, password])
+  }, [username, password, email])
 
   if (sessionUser) return <Redirect to="/" />;
 

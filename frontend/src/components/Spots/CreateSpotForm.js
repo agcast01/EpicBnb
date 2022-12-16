@@ -24,7 +24,7 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
     const [lng, setLng] = useState(0);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(50);
     const [previewImage, setPreviewImage] = useState('')
     const [errors, setErrors] = useState([]);
     const user = useSelector(state => state.session)
@@ -38,8 +38,9 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
         if(state.length > 25) newErrors.push("State must be less than 25 characters");
         if(country.length > 25) newErrors.push("Country must be less than 25 characters");
         if(name.length > 25) newErrors.push("Name must be less than 25 characters");
+        if(price < 50) newErrors.push('Price must be at least $50 per night.')
         setErrors(newErrors);
-    }, [address, city, state, country, name])
+    }, [address, city, state, country, name, price])
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -117,10 +118,12 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
                         type='number'
                         required
                         value={price}
+                        min='50'
                         onChange={e => setPrice(e.target.value)}
                     /> </label>
-                    <label >Preview Image URL
+                    <label>Preview Image URL
                         <input type='url'
+                            required
                             value={previewImage}
                             onChange={(e) => setPreviewImage(e.target.value)}
                         />

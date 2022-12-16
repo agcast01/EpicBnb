@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import * as reviewActions from '../../store/review'
 
 const EditReviewForm = ({setOpen, isOpen, currentReview}) => {
-    const [review, setReview] = useState('');
-    const [stars, setStars] = useState(0)
+    const [review, setReview] = useState(currentReview.review);
+    const [stars, setStars] = useState(currentReview.stars)
     const dispatch = useDispatch()
 
     const onSubmit = (e) => {
@@ -26,16 +26,16 @@ const EditReviewForm = ({setOpen, isOpen, currentReview}) => {
                 <label>Review
                 <input
                 type='text'
-                placeholder="Review"
-                value={review || currentReview.review}
+                value={review}
                 onChange={(e) => setReview(e.target.value)}
                 /></label>
                 <label>Stars
                 <input type='number'
                     min='1'
                     max='5'
-                    value={stars || currentReview.stars}
-                    onChange={(e) => setStars(Number(e.target.value))}
+                    value={stars}
+                    onChange={(e) => setStars(e.target.value)}
+                    required
                 /></label>
                 <button type='submit'>Submit</button>
                 <button onClick={() => setOpen(!isOpen)}>Cancel</button>
