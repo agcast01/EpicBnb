@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import * as reviewActions from '../../store/review'
 
 const AddReviewForm = ({setOpen, isOpen, spotId}) => {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0)
     const dispatch = useDispatch()
+
+    const history = useHistory()
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -16,6 +19,7 @@ const AddReviewForm = ({setOpen, isOpen, spotId}) => {
         
         dispatch(reviewActions.create(newReview, spotId)) 
         setOpen(!isOpen)
+        history.push(`/${spotId}`)
         return newReview;
     }
     return(
