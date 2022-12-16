@@ -11,7 +11,7 @@ const AddReviewForm = ({setOpen, isOpen, spotId}) => {
         e.preventDefault();
         const newReview = {
             review,
-            stars
+            stars: Number(stars)
         }
         
         dispatch(reviewActions.create(newReview, spotId)) 

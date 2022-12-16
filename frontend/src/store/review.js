@@ -98,12 +98,11 @@ const reviewReducer = (state = {}, action) => {
         case LOAD:
             return action.reviews;
         case CREATE:
-            newState[action.review.id] = action.review;
+            newState[Number(action.review.id)] = action.review;
             return newState;
         case DELETE:
             newState = {...state};
             delete newState[action.reviewId]
-            console.log('Delete State:', newState)
             return newState;
         default:
             return state;

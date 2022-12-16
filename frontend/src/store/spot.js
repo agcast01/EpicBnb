@@ -120,7 +120,7 @@ export const deleteSpotImage = (imageId, slot, spot) => async dispatch => {
     });
 
     if(response.ok) {
-        const newArr = spot.SpotImages.splice(slot, 1);
+        spot.SpotImages.splice(slot, 1);
         dispatch(createSpot(spot));
         return response;
     }

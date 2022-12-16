@@ -13,6 +13,7 @@
 import { useEffect, useState} from "react";
 import * as spotActions from '../../store/spot';
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const CreateSpotForm = ({isOpen, setOpen}) => {
     const dispatch = useDispatch()
@@ -30,6 +31,7 @@ const CreateSpotForm = ({isOpen, setOpen}) => {
     const user = useSelector(state => state.session)
 
     const disabled = Boolean(!user.user);    
+    const history = useHistory();
 
     useEffect(() => {
         let newErrors = [];

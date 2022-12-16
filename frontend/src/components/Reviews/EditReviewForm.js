@@ -11,7 +11,7 @@ const EditReviewForm = ({setOpen, isOpen, currentReview}) => {
         e.preventDefault();
         const newReview = {
             review,
-            stars
+            stars: Number(stars)
         }
 
         dispatch(reviewActions.edit(newReview, currentReview.id))
