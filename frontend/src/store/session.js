@@ -26,10 +26,13 @@ export const loginUser = (user) => async dispatch => {
         },
         body: JSON.stringify(user)
     })
-
+    if(response.ok){ 
         const data = await response.json();
         dispatch(login(data));
         return response;
+    }
+    const error = await response.json();
+    return error;
 }
 
 const SIGNUP = '/users/signup';
@@ -55,6 +58,9 @@ export const userSignUp = (user) => async dispatch => {
         dispatch(signup(newUser));
         return response;
     }
+
+    const error = await response.json();
+    console.log(error);
 }
 
 const LOGOUT = '/session/SIGNOUT';

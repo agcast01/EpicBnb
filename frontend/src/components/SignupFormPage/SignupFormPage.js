@@ -33,10 +33,13 @@ function SignupFormPage({setOpen, isOpen, user}) {
       const newUser = dispatch(sessionActions.userSignUp({ email, username, password, firstName, lastName }))
         .catch(async (res) => {
           const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+          if (data && data.errors) {
+            setErrors(Object.values(data.errors))};
+        }).else(() =>
+          setOpen(!isOpen)
+        );
 
-        setOpen(!isOpen)
+        
         return newUser;
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
@@ -48,7 +51,7 @@ function SignupFormPage({setOpen, isOpen, user}) {
     <div className="modal">
       <h2>Signup to EpicBnB</h2>
     <form onSubmit={handleSubmit}>
-      <ul>
+      <ul className="errors">
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
