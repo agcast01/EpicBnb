@@ -30,7 +30,7 @@ const Spots = () => {
                 <li key={spotId} onClick={() => history.push(`/${spotId}`)} className="listing">
                     <div className="imageCard" >
                         
-                        <img src={spots[spotId].previewImage}/>
+                        <img alt="House" src={spots[spotId].previewImage}/>
                         
                     </div>
                     <div>

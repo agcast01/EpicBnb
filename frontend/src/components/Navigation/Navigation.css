@@ -1,11 +1,19 @@
-.navbar li a {
+.navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+    margin: 0;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px;
+}
+
+.navbar a {
     width: fit-content;
     font-size: 24px;
 }
 
-.navbar li {
-    position: relative;
-}
+
 
 .material-symbols-outlined {
     font-variation-settings:
@@ -16,14 +24,12 @@
 }
 
 .right {
-    position: absolute;
-    right: 10px;
-    top: -20px;
+    display: flex;
+    align-items: center;
 }
 
-.right span {
+.right > span {
     margin-right: 15px;
-    padding: 5px;
 }
 
 .right>span:hover {
@@ -35,10 +41,14 @@ span .profile {
 
     border-radius: 30px;
     border: 1px solid rgba(50, 38, 38, 0.3);
-    padding: 15px 5px 5px 5px;
-    height: 50px;
     position: relative;
-    top: 10px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.right button {
+    margin-bottom: 0;
 }
 
 .profile:hover {
@@ -46,10 +56,7 @@ span .profile {
     cursor: pointer;
 }
 
-.navbar {
-    border-bottom: 1px solid rgba(0, 0, 0, .3);
-    padding-bottom: 20px;
-}
+
 
 #profile-pic {
     background-color: gray;
@@ -63,8 +70,6 @@ span .profile {
 }
 
 button {
-
-    padding: 5px 15px;
     background-color: transparent;
     border: none;
 }
@@ -78,7 +83,7 @@ button {
     padding: 20px;
     text-align: left;
     top: 50px;
-    left: -10px;
+    left: -80%;
 }
 
 .profile-dropdown li {

@@ -21,7 +21,6 @@ const SpotDetails = () => {
     const [deleteReview, setDeleteReview] = useState(false);
     const [imageShown, setImageShown] = useState(false);
     const [modal, setModal] = useState('none');
-    const [imageId, setImageId] = useState(0);
 
     useEffect(() => {
         dispatch(singleSpot(spotId));
@@ -85,6 +84,7 @@ const SpotDetails = () => {
                 return (
                     <DeleteSpotImage imageId={spot.SpotImages[imageShown].id} slot={imageShown} spot={spot} setModal={setModal} setImageShown={setImageShown} />
                 )
+            default: return
         }
     }
 
@@ -98,11 +98,11 @@ const SpotDetails = () => {
                             <p>★{avgRating || 0} · {Object.keys(reviews).length} reviews · {spot.city}, {spot.state}, {spot.country}</p>
                         </div>
                         <div className='images'>
-                            <img className="previewImage" src={spot.previewImage} />
+                            <img className="previewImage" alt="preview" src={spot.previewImage} />
                             <div className='otherImages'>
 
                                 <div className="spot-image">
-                                    <img src={(Boolean(spot.SpotImages[0]) && spot.SpotImages[0].url) || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'} />
+                                    <img alt='1' src={(Boolean(spot.SpotImages[0]) && spot.SpotImages[0].url) || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'} />
                                     {(spot && user && user.user.id === spot.ownerId) && <div>
                                         <span className="material-symbols-outlined" onClick={() => showImageOptions(0)}>more_horiz</span>
                                         { imageShown === 0 && addOrEdit(spot.SpotImages[0])}
@@ -110,7 +110,7 @@ const SpotDetails = () => {
                                 </div>
 
                                 <div className="spot-image">
-                                    <img src={(Boolean(spot.SpotImages[1]) && spot.SpotImages[1].url)  || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'} />
+                                    <img alt='2' src={(Boolean(spot.SpotImages[1]) && spot.SpotImages[1].url)  || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'} />
                                     {(spot && user && user.user.id === spot.ownerId) && <div>
                                         <span className="material-symbols-outlined" onClick={() => showImageOptions(1)} >more_horiz</span>
                                         {imageShown === 1 && addOrEdit(spot.SpotImages[1])}
@@ -118,7 +118,7 @@ const SpotDetails = () => {
                                 </div>
 
                                 <div className="spot-image">
-                                    <img src={(Boolean(spot.SpotImages[2]) && spot.SpotImages[2].url) || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'} />
+                                    <img alt="3" src={(Boolean(spot.SpotImages[2]) && spot.SpotImages[2].url) || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'} />
                                     {(spot && user && user.user.id === spot.ownerId) && <div>
                                         <span className="material-symbols-outlined" onClick={() => showImageOptions(2)} >more_horiz</span>
                                         {imageShown === 2 && addOrEdit(spot.SpotImages[2])}
@@ -126,7 +126,7 @@ const SpotDetails = () => {
                                 </div>
 
                                 <div className="spot-image">
-                                    <img src={(Boolean(spot.SpotImages[3]) && spot.SpotImages[3].url) || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'} />
+                                    <img alt='4' src={(Boolean(spot.SpotImages[3]) && spot.SpotImages[3].url) || 'https://as1.ftcdn.net/v2/jpg/04/34/72/82/1000_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg'} />
                                     {(spot && user && user.user.id === spot.ownerId) && <div>
                                         <span className="material-symbols-outlined" onClick={() => showImageOptions(3)} >more_horiz</span>
                                         {imageShown === 3 && addOrEdit(spot.SpotImages[3])}

@@ -41,8 +41,7 @@ function Navigation({ isLoaded }){
   
 
   return (
-    <ul className='navbar'>
-      <li>
+    <div className='navbar'>
         <NavLink exact to="/" style={{color: '#F55'}} id='logo'><img src={logo} alt='logo' style={{width: '30px'}}/>EpicBnB</NavLink>
         <span className='right' >
         <span onClick={() => toggleModal(createSpot, setCreateSpot)}>EpicBnB your home</span>
@@ -56,8 +55,7 @@ function Navigation({ isLoaded }){
           </span>
           </span>
         </span>
-      </li>
-    </ul>
+    </div>
   );
 }
 

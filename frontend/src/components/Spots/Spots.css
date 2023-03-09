@@ -1,7 +1,9 @@
 .spots {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 0 40px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .spots li {
@@ -50,8 +52,8 @@
 }
 
 .details {
-    width: 800px;
     margin: auto;
+    width: 800px;
 }
 
 .images {
@@ -61,6 +63,7 @@
     grid-template-columns: 49% 49%;
     gap: 2%;
     z-index: -1;
+    width: 800px;
 }
 
 .previewImage {

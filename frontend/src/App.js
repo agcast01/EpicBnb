@@ -2,18 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
-import LoginFormPage from "./components/LoginFormPage";
 import Navigation from "./components/Navigation";
-import SignupFormPage from "./components/SignupFormPage/SignupFormPage";
 import Spots from "./components/Spots/Spots";
 import * as sessionActions from './store/session'
-import CreateSpotForm from './components/Spots/CreateSpotForm'
-import MySpots from "./components/ProfilePage/MySpots";
 import SpotDetails from "./components/Spots/SpotDetails";
-import EditSpotForm from "./components/Spots/EditSpotFrom";
-import DeleteSpotForm from "./components/Spots/DeleteSpotForm";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
-import EditReviewForm from "./components/Reviews/EditReviewForm";
+
 
 function App() {
   const dispatch = useDispatch();
